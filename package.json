@@ -10,6 +10,8 @@
     "prettier": "npx prettier . --write"
   },
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
+    "@types/material-ui": "^0.21.9",
     "@types/styled-components": "^5.1.12",
     "next": "11.1.0",
     "prettier": "^2.3.2",
