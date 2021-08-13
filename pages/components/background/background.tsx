@@ -12,7 +12,7 @@ const Background = ({
         params={{
           particles: {
             number: {
-              value: 60,
+              value: 150,
               density: {
                 enable: true,
                 value_area: 1500,
@@ -20,14 +20,14 @@ const Background = ({
             },
             line_linked: {
               enable: true,
-              opacity: 0.02,
+              opacity: 0.1,
             },
             move: {
               direction: "right",
-              speed: 0.05,
+                speed: 0.2,
             },
             size: {
-              value: 1,
+              value: 2,
             },
             opacity: {
               anim: {
@@ -46,7 +46,7 @@ const Background = ({
             },
             modes: {
               push: {
-                particles_nb: 1,
+                particles_nb: 2,
               },
             },
           },

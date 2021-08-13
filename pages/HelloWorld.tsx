@@ -5,7 +5,7 @@ import {
   Typography,
 } from "@material-ui/core";
 
-const useDefaultTheme = makeStyles((theme: AugmentedTheme) =>
+export const useDefaultTheme = makeStyles((theme: AugmentedTheme) =>
   createStyles({
     root: {
       color: theme.colors.light.bolder,

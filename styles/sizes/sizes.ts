@@ -14,7 +14,7 @@ export type sizesOptions = {
 
 export const sizes = {
   taskbar: {
-    width: "10px",
-    height: "10px",
+    width: "100%",
+    height: "30px",
   },
 };
