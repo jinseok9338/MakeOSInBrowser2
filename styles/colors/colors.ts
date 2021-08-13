@@ -1,14 +1,57 @@
 export type colors = {
-  primary: string;
-  secondary: string;
+  light: {
+    primary: string;
+    secondary: string;
+    bold: string;
+    bolder: string;
+  };
+  dark: {
+    primary: string;
+    secondary: string;
+    bold: string;
+    bolder: string;
+  };
 };
 
 export type colorsOptions = {
-  primary?: string;
-  secondary?: string;
+  light?: {
+    primary?: string;
+    secondary?: string;
+    bold?: string;
+    bolder?: string;
+  };
+  dark?: {
+    primary?: string;
+    secondary?: string;
+    bold?: string;
+    bolder?: string;
+  };
 };
 
 export const colors = {
-  primary: "#FFAEBC",
-  secondary: "#A0E7E5",
+  light: {
+    primary: "#D4F1F4",
+    secondary: "#75E6DA",
+    bold: "#189AB4",
+    bolder: "#022636",
+  },
+  dark: {
+    primary: "#746C70",
+    secondary: "#4E4F50",
+    bold: "#E2DED0",
+    bolder: "#647C90",
+  },
 };
+
+// dark Theme
+// Gray
+// #746C70
+
+// Cool Gray
+// #4E4F50
+
+// Ivory
+// #E2DED0
+
+// Blue Gray
+// #647C90
