@@ -8,8 +8,8 @@ import Taskbar from "./components/taskbar/taskbar";
 const Home: NextPage = () => {
   return (
     <>
-      <Taskbar />
       <Background />
+      <Taskbar />
     </>
   );
 };

@@ -5,6 +5,8 @@ import FolderIcon from "@material-ui/icons/Folder";
 import RestoreIcon from "@material-ui/icons/Restore";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
+import React from "react";
+import StartButton from "./startButton/startButton";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,7 +22,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Taskbar = () => {
   const classes = useStyles();
-  return <BottomNavigation className={classes.root}></BottomNavigation>;
+  return (
+    <BottomNavigation className={classes.root}>
+      <StartButton />
+    </BottomNavigation>
+  );
 };
 
 export default Taskbar;

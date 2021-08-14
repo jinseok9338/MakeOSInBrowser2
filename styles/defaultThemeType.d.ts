@@ -1,5 +1,5 @@
 import { colors, colorsOptions } from "./colors/colors";
-import { sizes, sizesOptions } from "./sizes/sizes";
+import { sizes, sizesOptions } from "./sizes/sizesType";
 
 export module "@material-ui/core/styles/createTheme" {
   interface Theme {

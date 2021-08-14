@@ -24,7 +24,7 @@ const Background = ({
             },
             move: {
               direction: "right",
-                speed: 0.2,
+              speed: 0.2,
             },
             size: {
               value: 2,

@@ -1,20 +1,10 @@
-export type sizes = {
-  taskbar: {
-    width: string;
-    height: string;
-  };
-};
-
-export type sizesOptions = {
-  taskbar?: {
-    width?: string;
-    height?: string;
-  };
-};
-
 export const sizes = {
   taskbar: {
     width: "100%",
-    height: "30px",
+    height: "40px",
+  },
+  startButton: {
+    // height is the same size as the taskbar
+    width: "32px",
   },
 };
