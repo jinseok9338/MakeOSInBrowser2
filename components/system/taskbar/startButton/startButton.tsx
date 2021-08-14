@@ -14,10 +14,10 @@ const useStyles = makeStyles((theme: Theme) =>
       left: "0",
       display: "flex",
       justifyContent: "center",
-        alignItems: "center",
-       '&:hover': {
-       background: theme.colors.light.primary,
-    },
+      alignItems: "center",
+      "&:hover": {
+        background: theme.colors.light.primary,
+      },
     },
   })
 );
@@ -27,8 +27,7 @@ const StartButton = (): JSX.Element => {
   const fontStyle = {
     height: "25px",
     width: "25px",
-      color: colors.light.bold,
-      
+    color: colors.light.bold,
   };
 
   return (
