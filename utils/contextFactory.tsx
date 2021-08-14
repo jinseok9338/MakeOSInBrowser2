@@ -1,5 +1,5 @@
-import type { FC } from 'react';
-import { createContext, useContext } from 'react';
+
+import React, { createContext, useContext } from 'react';
 
 type ContextFactory = <T>(
   initialContextState: T,
@@ -12,7 +12,7 @@ const contextFactory: ContextFactory = (
 ) => {
   const Context = createContext(initialContextState);
 
-  const ProcessProvider: FC = ({ children }) => (
+  const ProcessProvider:React.FC = ({ children }:{children:React.ReactNode}) => (
     <Context.Provider value={useContextState()}>{children}</Context.Provider>
   );
 
