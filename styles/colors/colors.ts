@@ -4,10 +4,10 @@ export const colors = {
     secondary: "#75E6DA",
     bold: "#189AB4",
     bolder: "#022636",
-    highlight: "",
+    highlight: "#189AB4",
     text: "",
     taskbar: {
-      hover: "",
+      hover: "#75E6DA",
     },
   },
   dark: {

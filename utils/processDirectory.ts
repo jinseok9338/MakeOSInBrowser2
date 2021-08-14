@@ -5,7 +5,7 @@ const processDirectory: Processes = {
   HelloWorld: {
     Component: dynamic(() => import("pages/HelloWorld")),
     hasWindow: true,
-    icon: "/favicon.png",
+    icon: "/favicon.ico",
     title: "hello World",
   },
 };

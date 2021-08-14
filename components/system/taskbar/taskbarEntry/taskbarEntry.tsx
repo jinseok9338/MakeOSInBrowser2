@@ -10,19 +10,22 @@ const useStyles = makeStyles((theme: Theme) =>
       height: "100%",
       placeContent: "center",
       placeItems: "center",
-      width: theme.sizes.taskbar.entry.maxwidth,
+      left: theme.sizes.startButton.width,
+      maxWidth: theme.sizes.taskbar.entry.maxwidth,
       "&:hover": {
         backgroundColor: theme.colors.light.taskbar.hover,
       },
+    },
 
-      "&:figure": {
-        alignItems: "center",
-        display: "flex",
-        marginBottom: theme.sizes.taskbar.entry.borderSize,
-        marginLeft: "4px",
-        padding: "4px",
+    figure: {
+      alignItems: "center",
+      display: "flex",
+      marginBottom: theme.sizes.taskbar.entry.borderSize,
+      marginLeft: "4px",
+      padding: "4px",
+    },
 
-        "&:figcaption": {
+        figcaption: {
           color: theme.colors.light.text,
           fontSize: theme.sizes.taskbar.entry.fontSize,
           letterSpacing: "-0.1px",
@@ -32,15 +35,15 @@ const useStyles = makeStyles((theme: Theme) =>
           whiteSpace: "nowrap",
         },
 
-        "&:img": {
+        img: {
           height: theme.sizes.taskbar.entry.icon.size,
           /* margin: 2px; */
           position: "relative",
           top: "1px",
           width: theme.sizes.taskbar.entry.icon.size,
         },
-      },
-    },
+      
+  
   })
 );
 
@@ -58,12 +61,12 @@ const TaskbarEntry = ({
   const classes = useStyles();
 
   return (
-    <ListItem className={classes.root}>
-      <figure>
-        <img src={icon} alt={title} />
-        <figcaption>{title}</figcaption>
+    <li className={classes.root}>
+      <figure className={classes.figure}>
+        <img className={classes.img} src={icon} alt={title} />
+        <figcaption className={classes.figcaption}>{title}</figcaption>
       </figure>
-    </ListItem>
+    </li>
   );
 };
 

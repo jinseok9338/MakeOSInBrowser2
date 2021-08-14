@@ -3,6 +3,7 @@ import { Container, createStyles, makeStyles, Theme } from "@material-ui/core";
 import { faWindows } from "@fortawesome/free-brands-svg-icons";
 import React from "react";
 import { colors } from "styles/colors/colors";
+import { ProcessConsumer } from "contexts/process";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,9 +32,18 @@ const StartButton = (): JSX.Element => {
   };
 
   return (
-    <Container className={classes.startbutton}>
-      <FontAwesomeIcon style={fontStyle} icon={faWindows} />
-    </Container>
+    <ProcessConsumer>
+      {
+        ({ close, open }) => (
+          <Container className={classes.startbutton}
+          title="start"
+          onClick={() => open('HelloWorld')}
+          onDoubleClick={() => close('HelloWorld')}>
+          <FontAwesomeIcon style={fontStyle} icon={faWindows} />
+          </Container>
+        )
+      }
+    </ProcessConsumer>
   );
 };
 

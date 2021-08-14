@@ -4,7 +4,7 @@ import React from "react";
 const Background = ({
   children,
 }: {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }): JSX.Element => {
   return (
     <>
