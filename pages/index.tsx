@@ -9,9 +9,9 @@ import ProcessLoader from "components/system/processes/processLoader";
 const Home: NextPage = () => {
   return (
     <Background>
-    <ProcessProvider>
-      <Taskbar />
-      <ProcessLoader />
+      <ProcessProvider>
+        <Taskbar />
+        <ProcessLoader />
       </ProcessProvider>
     </Background>
   );

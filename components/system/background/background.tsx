@@ -1,7 +1,11 @@
 import Particles from "react-particles-js";
-import React from "react"
+import React from "react";
 
-const Background = ({ children }:{children:React.ReactNode}):JSX.Element => {
+const Background = ({
+  children,
+}: {
+  children: React.ReactNode;
+}): JSX.Element => {
   return (
     <>
       <Particles
@@ -51,7 +55,7 @@ const Background = ({ children }:{children:React.ReactNode}):JSX.Element => {
         }}
       >
         {children}
-        </Particles>
+      </Particles>
     </>
   );
 };

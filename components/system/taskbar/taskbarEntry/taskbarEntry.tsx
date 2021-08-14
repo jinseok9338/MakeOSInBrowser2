@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
           whiteSpace: "nowrap",
         },
 
-          "&:img": {
+        "&:img": {
           height: theme.sizes.taskbar.entry.icon.size,
           /* margin: 2px; */
           position: "relative",

@@ -29,7 +29,7 @@ export type colorsOptions = {
     secondary?: string;
     bold?: string;
     bolder?: string;
-        highlight?: string;
+    highlight?: string;
     text?: string;
     taskbar?: {
       hover?: string;
@@ -39,8 +39,8 @@ export type colorsOptions = {
     primary?: string;
     secondary?: string;
     bold?: string;
-      bolder?: string;
-      highlight?: string;
+    bolder?: string;
+    highlight?: string;
     text?: string;
     taskbar?: {
       hover?: string;
