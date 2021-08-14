@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Container, createStyles, makeStyles, Theme } from "@material-ui/core";
 import { faWindows } from "@fortawesome/free-brands-svg-icons";
 import React from "react";
-import { colors } from "../../../../styles/colors/colors";
+import { colors } from "styles/colors/colors";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

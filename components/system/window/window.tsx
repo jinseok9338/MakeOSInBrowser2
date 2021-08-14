@@ -1,6 +1,5 @@
 import { Box, createStyles, makeStyles, Theme } from "@material-ui/core";
 import React from "react"
-import type { FC } from "react";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

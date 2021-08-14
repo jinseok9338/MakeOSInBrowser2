@@ -1,12 +1,7 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import FolderIcon from "@material-ui/icons/Folder";
-import RestoreIcon from "@material-ui/icons/Restore";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
 import React from "react";
-import StartButton from "./startButton/startButton";
+import StartButton from "components/system/taskbar/startButton/startButton";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Taskbar = () => {
+const Taskbar = ():JSX.Element => {
   const classes = useStyles();
   return (
     <BottomNavigation className={classes.root}>
