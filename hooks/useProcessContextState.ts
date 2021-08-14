@@ -1,10 +1,10 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState } from "react";
 import type {
   ProcessContextState,
   Processes,
-  processesMap
-} from 'types/contexts/process';
-import { closeProcess, openProcess } from 'utils/processFunctions';
+  processesMap,
+} from "types/contexts/process";
+import { closeProcess, openProcess } from "utils/processFunctions";
 
 const useProcessContextState = (): ProcessContextState => {
   const [processes, setProcesses] = useState<Processes>({});

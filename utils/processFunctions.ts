@@ -1,5 +1,5 @@
-import type { Processes } from 'types/contexts/process';
-import ProcessDirectory from 'utils/processDirectory';
+import type { Processes } from "types/contexts/process";
+import ProcessDirectory from "utils/processDirectory";
 
 export const closeProcess =
   (processId: string) =>
@@ -12,5 +12,5 @@ export const openProcess =
       ? currentProcesses
       : {
           ...currentProcesses,
-          [processId]: ProcessDirectory[processId]
+          [processId]: ProcessDirectory[processId],
         };

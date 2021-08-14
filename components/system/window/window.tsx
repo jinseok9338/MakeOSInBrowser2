@@ -1,5 +1,5 @@
 import { Box, createStyles, makeStyles, Theme } from "@material-ui/core";
-import React from "react"
+import React from "react";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Window = ({ children }:{children:React.ReactNode}):JSX.Element => {
+const Window = ({ children }: { children: React.ReactNode }): JSX.Element => {
   const classes = useStyles();
 
   return <Box className={classes.windowBox}>{children}</Box>;

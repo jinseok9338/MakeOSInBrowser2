@@ -1,16 +1,19 @@
 import type { NextPage } from "next";
-import { Typography } from "@material-ui/core";
 import HelloWorld from "./HelloWorld";
-import Background from "../components/background/background";
+import Background from "components/system/background/background";
 import React from "react";
-import Taskbar from "../components/taskbar/taskbar";
+import Taskbar from "components/system/taskbar/taskbar";
+import { ProcessProvider } from "contexts/process";
+import ProcessLoader from "components/system/processes/processLoader";
 
 const Home: NextPage = () => {
   return (
-    <>
-      <Background />
+    <Background>
+    <ProcessProvider>
       <Taskbar />
-    </>
+      <ProcessLoader />
+      </ProcessProvider>
+    </Background>
   );
 };
 

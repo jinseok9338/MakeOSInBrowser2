@@ -1,10 +1,7 @@
 import Particles from "react-particles-js";
+import React from "react"
 
-const Background = ({
-  backgroundColor,
-}: {
-  backgroundColor?: string;
-}): JSX.Element => {
+const Background = ({ children }:{children:React.ReactNode}):JSX.Element => {
   return (
     <>
       <Particles
@@ -52,7 +49,9 @@ const Background = ({
           },
           retina_detect: true,
         }}
-      />
+      >
+        {children}
+        </Particles>
     </>
   );
 };
