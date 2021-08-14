@@ -27,7 +27,7 @@ const StartButton = (): JSX.Element => {
   const fontStyle = {
     height: "25px",
     width: "25px",
-      color: colors.light.primary,
+      color: colors.light.bold,
       
   };
 
