@@ -1,4 +1,4 @@
-import { Box } from '@material-ui/core';
+import { Box, makeStyles, Theme } from '@material-ui/core';
 import Popover from '@material-ui/core/Popover';
 import React, { useState, useEffect} from "react"
 
@@ -8,11 +8,18 @@ type StartPopUpMenuProps = {
 
 }
 
+const styles = makeStyles<Theme>((theme) => ({
+    popover: {
+        // pointerEvents: "none",
+    },
+}));
+
 const StartPopUpMenu = ({ el, handleClose }: StartPopUpMenuProps) => {
  
-   
+   const classes = styles()
     
     return (<Popover
+        className ={classes.popover}
         anchorOrigin={{
             vertical: 'top',
             horizontal: 'left',
@@ -21,6 +28,8 @@ const StartPopUpMenu = ({ el, handleClose }: StartPopUpMenuProps) => {
             vertical: 'bottom',
             horizontal: 'left',
         }}
+        marginThreshold={0}
+        disableEnforceFocus={true}
         open={!!el}
         anchorEl={el}
         onClose={() => handleClose()}

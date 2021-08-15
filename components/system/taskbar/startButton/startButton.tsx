@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
+     
       "&:hover": {
         background: theme.colors.light.primary,
       },
@@ -28,17 +29,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const StartButton = (): JSX.Element => {
-  const startButtonRef = React.useRef<HTMLDivElement>(null);
   const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     setAnchorEl(event.currentTarget);
-    console.log(anchorEl,"this is open")
   };
 
   const handleClose = () => {
     setAnchorEl(null);
-    console.log(anchorEl,"this is close")
   };
 
   const classes = useStyles();
@@ -53,11 +51,13 @@ const StartButton = (): JSX.Element => {
     <ProcessConsumer>
       {
         ({ close, open }) => (
-          <Container ref={startButtonRef} className={classes.startbutton} onClick={handleClick}
+          <>
+          <Container className={classes.startbutton} onClick={handleClick}
           title="start">
             <FontAwesomeIcon style={fontStyle} icon={faWindows} />
-            <StartPopUpMenu el={anchorEl} handleClose ={handleClose}/>
           </Container>
+            <StartPopUpMenu el={anchorEl} handleClose={handleClose} />
+            </>
         )
       }
     </ProcessConsumer>
