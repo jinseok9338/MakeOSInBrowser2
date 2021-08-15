@@ -10,7 +10,11 @@ const useStyles = makeStyles((theme: Theme) =>
       position: "absolute",
       textAlign: "center",
       fontSize: "50px",
+      cursor: "grab"
     },
+    handle: {
+      cursor: "grab"
+    }
   })
 );
 
@@ -18,7 +22,7 @@ const Window = ({ children }: { children: React.ReactNode }): JSX.Element => {
   const classes = useStyles();
 
   return (
-    <Draggable handle="#handle">
+    <Draggable>
       <Box className={classes.windowBox}>{children}</Box>
     </Draggable>
   );

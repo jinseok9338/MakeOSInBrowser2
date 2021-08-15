@@ -28,14 +28,18 @@ const menusArray: menusArrayType = [
 
 type PopUpMenuProps = {
     close: (id: string) => void
-    open: (id: string) => void
+  open: (id: string) => void
+  handleClose: () => void
 }
 
-const PopUpMenu = ({open,close}:PopUpMenuProps): JSX.Element => (
+const PopUpMenu = ({ open, close, handleClose}:PopUpMenuProps): JSX.Element => (
   <>
     {menusArray.map((obj) => (
       <>
-            <ListItem button key={obj.title} onClick={() => open("HelloWorld")}>
+        <ListItem button key={obj.title} onClick={() => {
+          open("HelloWorld")
+          handleClose()
+        }}>
           <ListItemAvatar>
             <Avatar>
               <FontAwesomeIcon icon={obj.icon} />

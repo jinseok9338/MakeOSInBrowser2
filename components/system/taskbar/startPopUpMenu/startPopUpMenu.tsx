@@ -36,7 +36,7 @@ const StartPopUpMenu = ({ el, handleClose,close,open }: StartPopUpMenuProps) => 
       anchorEl={el}
       onClose={() => handleClose()}
     >
-      <PopUpMenues close={close} open={open} />
+      <PopUpMenues close={close} open={open} handleClose={handleClose} />
     </Popover>
   );
 };
