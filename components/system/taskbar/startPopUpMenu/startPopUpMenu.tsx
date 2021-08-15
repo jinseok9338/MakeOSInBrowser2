@@ -5,7 +5,9 @@ import PopUpMenues from "./popUpMenus/popUpMenues";
 
 type StartPopUpMenuProps = {
   el: HTMLDivElement | null;
-  handleClose: () => void;
+    handleClose: () => void;
+    close: (id: string) => void
+    open: (id: string) => void
 };
 
 const styles = makeStyles<Theme>((theme) => ({
@@ -14,7 +16,7 @@ const styles = makeStyles<Theme>((theme) => ({
   },
 }));
 
-const StartPopUpMenu = ({ el, handleClose }: StartPopUpMenuProps) => {
+const StartPopUpMenu = ({ el, handleClose,close,open }: StartPopUpMenuProps) => {
   const classes = styles();
 
   return (
@@ -34,7 +36,7 @@ const StartPopUpMenu = ({ el, handleClose }: StartPopUpMenuProps) => {
       anchorEl={el}
       onClose={() => handleClose()}
     >
-      <PopUpMenues />
+      <PopUpMenues close={close} open={open} />
     </Popover>
   );
 };

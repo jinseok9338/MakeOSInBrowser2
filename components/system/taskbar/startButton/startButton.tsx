@@ -56,7 +56,7 @@ const StartButton = (): JSX.Element => {
           >
             <FontAwesomeIcon style={fontStyle} icon={faWindows} />
           </Container>
-          <StartPopUpMenu el={anchorEl} handleClose={handleClose} />
+          <StartPopUpMenu el={anchorEl} handleClose={handleClose} close={close} open ={open} />
         </>
       )}
     </ProcessConsumer>

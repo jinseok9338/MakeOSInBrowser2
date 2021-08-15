@@ -13,7 +13,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const PopUpMenues = () => {
+type PopUpMenuesProps = {
+    close: (id: string) => void
+    open: (id: string) => void
+}
+
+const PopUpMenues = ({ close, open }: PopUpMenuesProps) => {
   const classes = useStyles();
 
   return (
@@ -22,7 +27,7 @@ const PopUpMenues = () => {
       className={classes.menues}
       aria-label="mailbox folders"
     >
-      <PopUpMenu />
+      <PopUpMenu open={open} close={close} />
     </List>
   );
 };
