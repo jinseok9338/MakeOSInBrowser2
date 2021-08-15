@@ -37,7 +37,7 @@ const Window = ({ children }: { children: React.ReactChild  }): JSX.Element => {
   return (
     <ProcessConsumer>{
       ({open,close }) => (
-        <Draggable handle=".handle">
+        <Draggable defaultPosition={{ x: 300, y: 400 }} handle=".handle">
           <Container className={classes.windowBox}>
             <AppBar className={`handle ${classes.handle}`} position="static">
               <FontAwesomeIcon className={classes.icon} icon={faWindowClose} onClick={()=>close("HelloWorld")} />
