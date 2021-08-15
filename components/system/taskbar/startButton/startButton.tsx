@@ -5,7 +5,7 @@ import React, { useContext} from "react";
 import { colors } from "styles/colors/colors";
 import { ProcessConsumer } from "contexts/process";
 import StartPopUpMenu from "components/system/taskbar/startPopUpMenu/startPopUpMenu";
-import { AnchorFunctionContext } from "contexts/startPopUpMenuContext";
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,10 +33,12 @@ const StartButton = (): JSX.Element => {
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     setAnchorEl(event.currentTarget);
+    console.log(anchorEl,"this is open")
   };
 
   const handleClose = () => {
     setAnchorEl(null);
+    console.log(anchorEl,"this is close")
   };
 
   const classes = useStyles();

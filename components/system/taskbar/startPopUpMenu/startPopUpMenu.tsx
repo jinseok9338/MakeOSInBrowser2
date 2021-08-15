@@ -1,5 +1,6 @@
+import { Box } from '@material-ui/core';
 import Popover from '@material-ui/core/Popover';
-import React from "react"
+import React, { useState, useEffect} from "react"
 
 type StartPopUpMenuProps = {
     el: HTMLDivElement | null
@@ -9,8 +10,8 @@ type StartPopUpMenuProps = {
 
 const StartPopUpMenu = ({ el, handleClose }: StartPopUpMenuProps) => {
  
-    const open = Boolean(el)
-
+   
+    
     return (<Popover
         anchorOrigin={{
             vertical: 'top',
@@ -20,14 +21,15 @@ const StartPopUpMenu = ({ el, handleClose }: StartPopUpMenuProps) => {
             vertical: 'bottom',
             horizontal: 'left',
         }}
-        open={open}
-        anchorEl={el as HTMLDivElement}
-        onClose={()=>handleClose()}
+        open={!!el}
+        anchorEl={el}
+        onClose={() => handleClose()}
     >
-        The content of the Popover.
+        <Box>
+            This is the box with popper
+       </Box>
     </Popover>)
 }
 
 export default StartPopUpMenu;
-
-// make context that contains open and close function and refElement and wrap the Start Menu 
+//Problem with not updating the elment 

@@ -20,8 +20,8 @@ const Taskbar = (): JSX.Element => {
   const classes = useStyles();
   return (
     <BottomNavigation className={classes.root}>
-      <StartButton />
       <TaskbarEntries />
+      <StartButton />
     </BottomNavigation>
   );
 };
