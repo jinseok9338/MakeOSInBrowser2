@@ -1,9 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Container, createStyles, makeStyles, Theme } from "@material-ui/core";
 import { faWindows } from "@fortawesome/free-brands-svg-icons";
-import React from "react";
+import React, { useContext} from "react";
 import { colors } from "styles/colors/colors";
 import { ProcessConsumer } from "contexts/process";
+import StartPopUpMenu from "components/system/taskbar/startPopUpMenu/startPopUpMenu";
+import { AnchorFunctionContext } from "contexts/startPopUpMenuContext";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,22 +28,33 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const StartButton = (): JSX.Element => {
+  const startButtonRef = React.useRef<HTMLDivElement>(null);
+  const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const classes = useStyles();
   const fontStyle = {
     height: "22px",
     width: "22px",
     color: colors.light.bold,
   };
+ 
 
   return (
     <ProcessConsumer>
       {
         ({ close, open }) => (
-          <Container className={classes.startbutton}
-          title="start"
-          onClick={() => open('HelloWorld')}
-          onDoubleClick={() => close('HelloWorld')}>
-          <FontAwesomeIcon style={fontStyle} icon={faWindows} />
+          <Container ref={startButtonRef} className={classes.startbutton} onClick={handleClick}
+          title="start">
+            <FontAwesomeIcon style={fontStyle} icon={faWindows} />
+            <StartPopUpMenu el={anchorEl} handleClose ={handleClose}/>
           </Container>
         )
       }
