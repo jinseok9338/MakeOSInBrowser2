@@ -5,7 +5,7 @@ export const sizes = {
     entry: {
       maxwidth: "161px",
       borderSize: "2px",
-      fontSize: "12px",
+      fontSize: "14px",
       icon: {
         size: "16px",
       },
@@ -13,6 +13,6 @@ export const sizes = {
   },
   startButton: {
     // height is the same size as the taskbar
-    width: "32px",
+    width: "48px",
   },
 };

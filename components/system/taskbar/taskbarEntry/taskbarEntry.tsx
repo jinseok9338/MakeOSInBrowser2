@@ -28,8 +28,9 @@ const useStyles = makeStyles((theme: Theme) =>
         figcaption: {
           color: theme.colors.light.text,
           fontSize: theme.sizes.taskbar.entry.fontSize,
-          letterSpacing: "-0.1px",
-          marginLeft: "5px",
+          fontWeight:"bold",
+          letterSpacing: "-0.2px",
+          marginLeft: "4px",
           overflowX: "hidden",
           textOverflow: "ellipsis",
           whiteSpace: "nowrap",

@@ -11,6 +11,8 @@ const useStyles = makeStyles((theme: Theme) =>
       width: theme.sizes.startButton.width,
       height: theme.sizes.taskbar.height,
       background: theme.colors.light.secondary,
+      paddingRight: 0,
+      paddingLeft:0,
       position: "absolute",
       left: "0",
       display: "flex",
@@ -26,8 +28,8 @@ const useStyles = makeStyles((theme: Theme) =>
 const StartButton = (): JSX.Element => {
   const classes = useStyles();
   const fontStyle = {
-    height: "25px",
-    width: "25px",
+    height: "22px",
+    width: "22px",
     color: colors.light.bold,
   };
 
