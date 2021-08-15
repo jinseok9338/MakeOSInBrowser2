@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
       position: "absolute",
       right: theme.sizes.startButton.width,
       paddingTop: 0,
-      paddingBottom:0
+      paddingBottom: 0,
     },
   })
 );
