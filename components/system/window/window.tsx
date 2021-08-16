@@ -42,7 +42,7 @@ const Window = ({ children }: { children: React.ReactChild }): JSX.Element => {
 
   return (
     <ProcessConsumer>
-      {({ open, close }) => (
+      {({ close }) => (
         <Draggable defaultPosition={{ x: 300, y: 400 }} handle=".handle">
           <Container className={classes.windowBox}>
             <AppBar className={`handle ${classes.handle}`} position="static">
@@ -62,4 +62,4 @@ const Window = ({ children }: { children: React.ReactChild }): JSX.Element => {
 
 export default Window;
 
-//https://lo-victoria.com/making-draggable-components-in-react
+

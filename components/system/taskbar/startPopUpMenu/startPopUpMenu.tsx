@@ -1,6 +1,5 @@
-import { Box, makeStyles, Theme } from "@material-ui/core";
 import Popover from "@material-ui/core/Popover";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PopUpMenues from "./popUpMenues/popUpMenues";
 
 type StartPopUpMenuProps = {
