@@ -13,6 +13,7 @@ import {
   faYelp,
   faYoutubeSquare,
 } from "@fortawesome/free-brands-svg-icons";
+import { ProcessConsumer } from "contexts/process";
 
 type menusArrayType = { title: string; icon: IconDefinition }[];
 
@@ -25,38 +26,37 @@ const menusArray: menusArrayType = [
 ];
 
 type PopUpMenuProps = {
-  close: (id: string) => void;
-  open: (id: string) => void;
   handleClose: () => void;
 };
 
 const PopUpMenu = ({
-  open,
-  close,
   handleClose,
 }: PopUpMenuProps): JSX.Element => (
-  <>
-    {menusArray.map((obj) => (
-      <>
-        <ListItem
-          button
-          key={obj.title}
-          onClick={() => {
-            open("HelloWorld");
-            handleClose();
-          }}
-        >
-          <ListItemAvatar>
-            <Avatar>
-              <FontAwesomeIcon icon={obj.icon} />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary={obj.title} />
-        </ListItem>
-        <Divider variant="inset" component="li" />
-      </>
-    ))}
-  </>
-);
+  <ProcessConsumer>
+    {
+    ({ open }) => (<>
+      {menusArray.map((obj) => (
+        <>
+          <ListItem
+            button
+            key={obj.title}
+            onClick={() => {
+              open("HelloWorld");
+              handleClose();
+            }}
+          >
+            <ListItemAvatar>
+              <Avatar>
+                <FontAwesomeIcon icon={obj.icon} />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary={obj.title} />
+          </ListItem>
+          <Divider variant="inset" component="li" />
+        </>
+      ))}
+    </>)}
+  </ProcessConsumer>
+)
 
 export default PopUpMenu;

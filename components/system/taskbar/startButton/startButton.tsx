@@ -26,8 +26,6 @@ const StartButton = (): JSX.Element => {
   };
 
   return (
-    <ProcessConsumer>
-      {({ close, open }) => (
         <>
           <Container
             className={classes.startbutton}
@@ -39,12 +37,8 @@ const StartButton = (): JSX.Element => {
           <StartPopUpMenu
             el={anchorEl}
             handleClose={handleClose}
-            close={close}
-            open={open}
           />
         </>
-      )}
-    </ProcessConsumer>
   );
 };
 

@@ -4,12 +4,10 @@ import PopUpMenu from "./popUpMenu";
 import { useStyles } from "./styledPopUpMenues";
 
 type PopUpMenuesProps = {
-  close: (id: string) => void;
-  open: (id: string) => void;
   handleClose: () => void;
 };
 
-const PopUpMenues = ({ close, open, handleClose }: PopUpMenuesProps) => {
+const PopUpMenues = ({  handleClose }: PopUpMenuesProps):JSX.Element => {
   const classes = useStyles();
 
   return (
@@ -18,7 +16,7 @@ const PopUpMenues = ({ close, open, handleClose }: PopUpMenuesProps) => {
       className={classes.menues}
       aria-label="mailbox folders"
     >
-      <PopUpMenu open={open} close={close} handleClose={handleClose} />
+      <PopUpMenu  handleClose={handleClose} />
     </List>
   );
 };

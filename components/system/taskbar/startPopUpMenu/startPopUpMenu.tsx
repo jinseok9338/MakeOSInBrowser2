@@ -6,16 +6,13 @@ import PopUpMenues from "./popUpMenues/popUpMenues";
 type StartPopUpMenuProps = {
   el: HTMLDivElement | null;
   handleClose: () => void;
-  close: (id: string) => void;
-  open: (id: string) => void;
+
 };
 
 const StartPopUpMenu = ({
   el,
   handleClose,
-  close,
-  open,
-}: StartPopUpMenuProps) => {
+}: StartPopUpMenuProps):JSX.Element => {
   return (
     <Popover
       anchorOrigin={{
@@ -32,7 +29,7 @@ const StartPopUpMenu = ({
       anchorEl={el}
       onClose={() => handleClose()}
     >
-      <PopUpMenues close={close} open={open} handleClose={handleClose} />
+      <PopUpMenues handleClose={handleClose} />
     </Popover>
   );
 };
