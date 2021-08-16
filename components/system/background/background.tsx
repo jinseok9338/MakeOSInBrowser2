@@ -24,7 +24,7 @@ const Background = ({
               opacity: 0.1,
             },
             move: {
-              direction: "right",
+              direction: "none",
               speed: 0.2,
             },
             size: {

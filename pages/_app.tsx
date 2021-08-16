@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <FileSystemProvider>
       <SessionProvider>
         <ThemeProvider theme={defaultTheme}>
-            <Component {...pageProps} />
+          <Component {...pageProps} />
         </ThemeProvider>
       </SessionProvider>
     </FileSystemProvider>

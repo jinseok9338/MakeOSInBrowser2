@@ -17,9 +17,9 @@ export const useDefaultTheme = makeStyles((theme: AugmentedTheme) =>
 const HelloWorld = (): JSX.Element => {
   const classes = useDefaultTheme();
   return (
-    <Typography variant="h1" component="h2" className={classes.root}>
-      Hello World
-    </Typography>
+    <div>
+      <p>Hello World</p>
+    </div>
   );
 };
 

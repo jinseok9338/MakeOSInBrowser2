@@ -24,10 +24,12 @@
     "ini": "^2.0.0",
     "next": "11.1.0",
     "prettier": "^2.3.2",
+    "re-resizable": "^6.9.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-draggable": "^4.4.3",
     "react-particles-js": "^3.5.3",
+    "react-rnd": "^10.3.4",
     "styled-components": "^5.3.0",
     "tsparticles": "^1.33.3"
   },
