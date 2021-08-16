@@ -1,23 +1,13 @@
 import React from "react";
 import List from "@material-ui/core/List";
-import { makeStyles, Theme, createStyles } from "@material-ui/core";
 import PopUpMenu from "./popUpMenu";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    menues: {
-      width: "100%",
-      maxWidth: 360,
-      backgroundColor: theme.palette.background.paper,
-    },
-  })
-);
+import { useStyles } from "./styledPopUpMenues";
 
 type PopUpMenuesProps = {
-    close: (id: string) => void
-  open: (id: string) => void
-  handleClose: () => void
-}
+  close: (id: string) => void;
+  open: (id: string) => void;
+  handleClose: () => void;
+};
 
 const PopUpMenues = ({ close, open, handleClose }: PopUpMenuesProps) => {
   const classes = useStyles();

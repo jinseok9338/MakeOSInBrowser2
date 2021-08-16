@@ -1,31 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Container, createStyles, makeStyles, Theme } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import { faWindows } from "@fortawesome/free-brands-svg-icons";
-import React, { useContext } from "react";
+import React from "react";
 import { colors } from "styles/colors/colors";
 import { ProcessConsumer } from "contexts/process";
 import StartPopUpMenu from "components/system/taskbar/startPopUpMenu/startPopUpMenu";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    startbutton: {
-      width: theme.sizes.startButton.width,
-      height: theme.sizes.taskbar.height,
-      background: theme.colors.light.secondary,
-      paddingRight: 0,
-      paddingLeft: 0,
-      position: "absolute",
-      left: "0",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-
-      "&:hover": {
-        background: theme.colors.light.primary,
-      },
-    },
-  })
-);
+import { useStyles } from "./styledStartButton";
 
 const StartButton = (): JSX.Element => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null);
@@ -56,7 +36,12 @@ const StartButton = (): JSX.Element => {
           >
             <FontAwesomeIcon style={fontStyle} icon={faWindows} />
           </Container>
-          <StartPopUpMenu el={anchorEl} handleClose={handleClose} close={close} open ={open} />
+          <StartPopUpMenu
+            el={anchorEl}
+            handleClose={handleClose}
+            close={close}
+            open={open}
+          />
         </>
       )}
     </ProcessConsumer>

@@ -1,4 +1,10 @@
-import { AppBar, Container, createStyles, makeStyles, Theme } from "@material-ui/core";
+import {
+  AppBar,
+  Container,
+  createStyles,
+  makeStyles,
+  Theme,
+} from "@material-ui/core";
 import React from "react";
 import Draggable from "react-draggable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,38 +21,42 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: "50px",
       paddingLeft: 0,
       paddingRight: 0,
-      width: "350px"
+      width: "350px",
     },
     handle: {
       cursor: "grab",
-      height: "30px"
+      height: "30px",
     },
-    icon:{
+    icon: {
       fontSize: "25px",
-      top:"2px",
+      top: "2px",
       right: "4px",
       position: "absolute",
       cursor: "pointer",
-    }
+    },
   })
 );
 
-const Window = ({ children }: { children: React.ReactChild  }): JSX.Element => {
+const Window = ({ children }: { children: React.ReactChild }): JSX.Element => {
   const classes = useStyles();
 
   return (
-    <ProcessConsumer>{
-      ({open,close }) => (
+    <ProcessConsumer>
+      {({ open, close }) => (
         <Draggable defaultPosition={{ x: 300, y: 400 }} handle=".handle">
           <Container className={classes.windowBox}>
             <AppBar className={`handle ${classes.handle}`} position="static">
-              <FontAwesomeIcon className={classes.icon} icon={faWindowClose} onClick={()=>close("HelloWorld")} />
+              <FontAwesomeIcon
+                className={classes.icon}
+                icon={faWindowClose}
+                onClick={() => close("HelloWorld")}
+              />
             </AppBar>
             {children}
           </Container>
-        </Draggable> )}
+        </Draggable>
+      )}
     </ProcessConsumer>
-
   );
 };
 

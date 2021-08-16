@@ -4,7 +4,6 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
-import ImageIcon from "@material-ui/icons/Image";
 import Divider from "@material-ui/core/Divider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee } from "@fortawesome/free-solid-svg-icons";
@@ -24,22 +23,29 @@ const menusArray: menusArrayType = [
   { title: "Yelp", icon: faYelp },
   { title: "AmazonPay", icon: faAmazonPay },
 ];
-//[{name:"",icon:""},...]
 
 type PopUpMenuProps = {
-    close: (id: string) => void
-  open: (id: string) => void
-  handleClose: () => void
-}
+  close: (id: string) => void;
+  open: (id: string) => void;
+  handleClose: () => void;
+};
 
-const PopUpMenu = ({ open, close, handleClose}:PopUpMenuProps): JSX.Element => (
+const PopUpMenu = ({
+  open,
+  close,
+  handleClose,
+}: PopUpMenuProps): JSX.Element => (
   <>
     {menusArray.map((obj) => (
       <>
-        <ListItem button key={obj.title} onClick={() => {
-          open("HelloWorld")
-          handleClose()
-        }}>
+        <ListItem
+          button
+          key={obj.title}
+          onClick={() => {
+            open("HelloWorld");
+            handleClose();
+          }}
+        >
           <ListItemAvatar>
             <Avatar>
               <FontAwesomeIcon icon={obj.icon} />
