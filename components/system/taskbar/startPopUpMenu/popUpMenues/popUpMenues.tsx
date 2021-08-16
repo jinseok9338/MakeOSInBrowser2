@@ -7,7 +7,7 @@ type PopUpMenuesProps = {
   handleClose: () => void;
 };
 
-const PopUpMenues = ({  handleClose }: PopUpMenuesProps):JSX.Element => {
+const PopUpMenues = ({ handleClose }: PopUpMenuesProps): JSX.Element => {
   const classes = useStyles();
 
   return (
@@ -16,7 +16,7 @@ const PopUpMenues = ({  handleClose }: PopUpMenuesProps):JSX.Element => {
       className={classes.menues}
       aria-label="mailbox folders"
     >
-      <PopUpMenu  handleClose={handleClose} />
+      <PopUpMenu handleClose={handleClose} />
     </List>
   );
 };

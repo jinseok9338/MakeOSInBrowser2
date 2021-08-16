@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import HelloWorld from "./HelloWorld";
+import HelloWorld from "../components/app/HelloWorld";
 import Background from "components/system/background/background";
 import React from "react";
 import Taskbar from "components/system/taskbar/taskbar";

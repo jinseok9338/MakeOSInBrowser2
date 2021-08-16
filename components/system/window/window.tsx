@@ -61,5 +61,3 @@ const Window = ({ children }: { children: React.ReactChild }): JSX.Element => {
 };
 
 export default Window;
-
-

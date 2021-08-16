@@ -29,34 +29,33 @@ type PopUpMenuProps = {
   handleClose: () => void;
 };
 
-const PopUpMenu = ({
-  handleClose,
-}: PopUpMenuProps): JSX.Element => (
+const PopUpMenu = ({ handleClose }: PopUpMenuProps): JSX.Element => (
   <ProcessConsumer>
-    {
-    ({ open }) => (<>
-      {menusArray.map((obj) => (
-        <>
-          <ListItem
-            button
-            key={obj.title}
-            onClick={() => {
-              open("HelloWorld");
-              handleClose();
-            }}
-          >
-            <ListItemAvatar>
-              <Avatar>
-                <FontAwesomeIcon icon={obj.icon} />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={obj.title} />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-        </>
-      ))}
-    </>)}
+    {({ open }) => (
+      <>
+        {menusArray.map((obj) => (
+          <>
+            <ListItem
+              button
+              key={obj.title}
+              onClick={() => {
+                open("HelloWorld");
+                handleClose();
+              }}
+            >
+              <ListItemAvatar>
+                <Avatar>
+                  <FontAwesomeIcon icon={obj.icon} />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={obj.title} />
+            </ListItem>
+            <Divider variant="inset" component="li" />
+          </>
+        ))}
+      </>
+    )}
   </ProcessConsumer>
-)
+);
 
 export default PopUpMenu;

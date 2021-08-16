@@ -5,13 +5,12 @@ import PopUpMenues from "./popUpMenues/popUpMenues";
 type StartPopUpMenuProps = {
   el: HTMLDivElement | null;
   handleClose: () => void;
-
 };
 
 const StartPopUpMenu = ({
   el,
   handleClose,
-}: StartPopUpMenuProps):JSX.Element => {
+}: StartPopUpMenuProps): JSX.Element => {
   return (
     <Popover
       anchorOrigin={{

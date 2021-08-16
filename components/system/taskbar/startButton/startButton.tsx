@@ -3,7 +3,6 @@ import { Container } from "@material-ui/core";
 import { faWindows } from "@fortawesome/free-brands-svg-icons";
 import React from "react";
 import { colors } from "styles/colors/colors";
-import { ProcessConsumer } from "contexts/process";
 import StartPopUpMenu from "components/system/taskbar/startPopUpMenu/startPopUpMenu";
 import { useStyles } from "./styledStartButton";
 
@@ -26,19 +25,16 @@ const StartButton = (): JSX.Element => {
   };
 
   return (
-        <>
-          <Container
-            className={classes.startbutton}
-            onClick={handleClick}
-            title="start"
-          >
-            <FontAwesomeIcon style={fontStyle} icon={faWindows} />
-          </Container>
-          <StartPopUpMenu
-            el={anchorEl}
-            handleClose={handleClose}
-          />
-        </>
+    <>
+      <Container
+        className={classes.startbutton}
+        onClick={handleClick}
+        title="start"
+      >
+        <FontAwesomeIcon style={fontStyle} icon={faWindows} />
+      </Container>
+      <StartPopUpMenu el={anchorEl} handleClose={handleClose} />
+    </>
   );
 };
 
