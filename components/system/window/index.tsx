@@ -1,68 +1,50 @@
-import {
-  AppBar,
-  Container,
-  createStyles,
-  makeStyles,
-  Theme,
-} from "@material-ui/core";
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
-import { ProcessConsumer } from "contexts/process";
-import { Rnd } from "react-rnd";
+import type { ComponentProcessProps } from "components/system/Apps/RenderComponent";
+import StyledPeekViewport from "components/system/Taskbar/TaskbarEntry/Peek/StyledPeekViewport";
+import RndWindow from "components/system/window/RndWindow";
+import StyledWindow from "components/system/window/styledWindow";
+import Titlebar from "components/system/window/titleBar";
+import useFocusable from "components/system/window/useFocusable";
+import useWindowTransitions from "components/system/window/useWindowTransitions";
+import { useProcesses } from "contexts/process";
+import { useSession } from "contexts/session";
+import React,{ useEffect, useRef } from "react";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    windowBox: {
-      background: theme.colors.light.primary,
-      color: theme.colors.light.secondary,
-      textAlign: "center",
-      fontSize: "50px",
-      paddingLeft: 0,
-      paddingRight: 0,
-      resize: "both"
-    },
-    handle: {
-      cursor: "grab",
-      height: "30px",
-    },
-    icon: {
-      fontSize: "25px",
-      top: "2px",
-      right: "4px",
-      position: "absolute",
-      cursor: "pointer",
-    },
-  })
-);
+type WindowProps = ComponentProcessProps & {
+  children: React.ReactNode;
+};
 
-const Window = ({ children }: { children: React.ReactChild }): JSX.Element => {
-  const classes = useStyles();
+const Window = ({ children, id }: WindowProps): JSX.Element => {
+  const {
+    linkElement,
+    processes: { [id]: process },
+  } = useProcesses();
+  const { backgroundColor, peekElement } = process || {};
+  const { foregroundId } = useSession();
+  const isForeground = id === foregroundId;
+  const { zIndex, ...focusableProps } = useFocusable(id);
+  const windowTransitions = useWindowTransitions(id);
+  const viewportRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (process && !peekElement && viewportRef.current) {
+      linkElement(id, "peekElement", viewportRef.current);
+    }
+  }, [id, linkElement, peekElement, process]);
 
   return (
-    <ProcessConsumer>
-      {({ close }) => (
-        <Rnd
-          default={{
-            x: 0,
-            y: 0,
-            width: 350,
-            height: 350,
-          }}
-        >
-          <Container className={classes.windowBox}>
-            <Container className={`handle ${classes.handle}`} >
-              <FontAwesomeIcon
-                className={classes.icon}
-                icon={faWindowClose}
-                onClick={() => close("HelloWorld")}
-              />
-            </Container>
-            {children}
-          </Container>
-        </Rnd>
-      )}
-    </ProcessConsumer>
+    <RndWindow id={id} zIndex={zIndex}>
+      <StyledWindow
+        foreground={isForeground}
+        style={{ backgroundColor }}
+        {...focusableProps}
+        {...windowTransitions}
+      >
+        <StyledPeekViewport ref={viewportRef}>
+          <Titlebar id={id} />
+          {children}
+        </StyledPeekViewport>
+      </StyledWindow>
+    </RndWindow>
   );
 };
 

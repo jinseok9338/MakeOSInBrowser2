@@ -12,7 +12,7 @@ import { useSession } from "contexts/session";
 import Button from "styles/common/Button"; // Copy button Style and change it to material ui theme 
 import Icon from "styles/common/Icon";
 import useDoubleClick from "utils/useDoubleClick";
-import React from "react"
+import React from "react";
 
 type TitlebarProps = {
     id: string;

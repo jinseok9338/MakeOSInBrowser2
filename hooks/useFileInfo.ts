@@ -25,7 +25,7 @@ const useFileInfo = (path: string) => {
           setPid(URL);
         });
         // Do shortCut Stuff
-      } else if (IMAGE_FILE_EXTENSIONS.includes(extension)) {
+      } else if (IMAGE_FILE_EXTENSIONS.has(extension)) {
         setIcon(path);
         setPid("ImageViewer");
       } else {

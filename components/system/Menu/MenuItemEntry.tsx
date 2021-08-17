@@ -6,7 +6,7 @@ import type { Position } from "react-rnd";
 import { useTheme } from "styled-components";
 import Button from "styles/common/Button";
 import Icon from "styles/common/Icon";
-import React from "react"
+import React from "react";
 
 type MenuItemEntryProps = MenuItem & {
     resetMenu: () => void;

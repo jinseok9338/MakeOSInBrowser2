@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import React from "react"
+import React from "react";
 const Window = dynamic(() => import("components/system/window"));
 
 export type ComponentProcessProps = {

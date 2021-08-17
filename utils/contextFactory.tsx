@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import React from "react"
+import React from "react";
 
 type ProcessProviderProps = {
   children: React.ReactNode;

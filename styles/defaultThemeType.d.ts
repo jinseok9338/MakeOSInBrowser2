@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { colors, colorsOptions } from "styles/colors/colorsType";
 import { sizes, sizesOptions } from "styles/sizes/sizesType";
 

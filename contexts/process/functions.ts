@@ -26,6 +26,7 @@ export const closeProcess =
                 return setProcessSettings(processId, { closing })(currentProcesses);
             }
 
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { [processId]: _closedProcess, ...remainingProcesses } =
                 currentProcesses;
 
