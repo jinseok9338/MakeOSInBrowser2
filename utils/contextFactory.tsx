@@ -1,22 +1,24 @@
-import React, { createContext, ReactNode, useContext } from "react";
-
-type ContextFactory = <T>(
-  initialContextState: T,
-  useContextState: () => T
-) => { Consumer: React.Consumer<T>; Provider: React.FC; useContext: () => T };
+import { createContext, useContext } from "react";
+import React from "react"
 
 type ProcessProviderProps = {
-  children?: ReactNode;
+  children: React.ReactNode;
 };
 
-const contextFactory: ContextFactory = (
-  initialContextState,
-  useContextState
-) => {
-  const Context = createContext(initialContextState);
-
-  const ProcessProvider: React.FC = ({ children }: ProcessProviderProps) => (
-    <Context.Provider value={useContextState()}>{children}</Context.Provider>
+const contextFactory = <T,>(
+  useContextState: () => T,
+  ContextComponent?: React.ComponentType
+): {
+  Consumer: React.Consumer<T>;
+  Provider: (props: ProcessProviderProps) => JSX.Element;
+  useContext: () => T;
+} => {
+  const Context = createContext<T>({} as T);
+  const ProcessProvider = ({ children }: ProcessProviderProps): JSX.Element => (
+    <Context.Provider value={useContextState()}>
+      {children}
+      {ContextComponent ? <ContextComponent /> : <></>}
+    </Context.Provider>
   );
 
   return {
