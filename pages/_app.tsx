@@ -1,4 +1,4 @@
-import Metadata from "components/pages/Metadata";
+// import Metadata from "components/pages/Metadata";
 import StyledApp from "components/pages/StyledApp";
 import { FileSystemProvider } from "contexts/fileSystem";
 import { MenuProvider } from "contexts/menu";
@@ -12,7 +12,7 @@ const App = ({ Component, pageProps }: AppProps): React.ReactElement => (
     <SessionProvider>
       <ProcessProvider>
         <StyledApp>
-          <Metadata />
+          {/* <Metadata /> */}
           <MenuProvider>
             <Component {...pageProps} />
           </MenuProvider>

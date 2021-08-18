@@ -1,5 +1,5 @@
 import type { ComponentProcessProps } from "components/system/Apps/RenderComponent";
-import StyledPeekViewport from "components/system/Taskbar/TaskbarEntry/Peek/StyledPeekViewport";
+import StyledPeekViewport from "components/system/taskbar/taskbarEntry/Peek/StyledPeekViewport";
 import RndWindow from "components/system/window/RndWindow";
 import StyledWindow from "components/system/window/styledWindow";
 import Titlebar from "components/system/window/titleBar";
