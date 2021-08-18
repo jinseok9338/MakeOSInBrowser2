@@ -8,16 +8,16 @@ export type Size = NonNullable<Props["size"]>;
 type Resizable = [Size, React.Dispatch<React.SetStateAction<Size>>];
 
 const useResizable = (id: string, autoSizing = false): Resizable => {
-    const defaultSize = useDefaultSize(id);
-    const { windowStates: { [id]: { size = defaultSize } = {} } = {} } =
-        useSession();
-    const [{ height, width }, setSize] = useState<Size>(size);
+  const defaultSize = useDefaultSize(id);
+  const { windowStates: { [id]: { size = defaultSize } = {} } = {} } =
+    useSession();
+  const [{ height, width }, setSize] = useState<Size>(size);
 
-    useEffect(() => {
-        if (autoSizing) setSize(size);
-    }, [autoSizing, size]);
+  useEffect(() => {
+    if (autoSizing) setSize(size);
+  }, [autoSizing, size]);
 
-    return [{ height, width }, setSize];
+  return [{ height, width }, setSize];
 };
 
 export default useResizable;

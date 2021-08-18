@@ -3,26 +3,26 @@ import React from "react";
 const Window = dynamic(() => import("components/system/window"));
 
 export type ComponentProcessProps = {
-    id: string;
+  id: string;
 };
 
 type RenderComponentProps = {
-    Component: React.ComponentType<ComponentProcessProps>;
-    hasWindow?: boolean;
-    id: string;
+  Component: React.ComponentType<ComponentProcessProps>;
+  hasWindow?: boolean;
+  id: string;
 };
 
 const RenderComponent = ({
-    Component,
-    hasWindow = true,
-    id,
+  Component,
+  hasWindow = true,
+  id,
 }: RenderComponentProps): JSX.Element =>
-    hasWindow ? (
-        <Window id= { id } >
-        <Component id={ id } />
-            </Window>
+  hasWindow ? (
+    <Window id={id}>
+      <Component id={id} />
+    </Window>
   ) : (
-    <Component id= { id } />
+    <Component id={id} />
   );
 
 export default RenderComponent;

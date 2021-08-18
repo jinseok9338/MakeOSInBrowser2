@@ -6,41 +6,41 @@ import type { DefaultTheme, StyledComponent } from "styled-components";
 import type { IconProps } from "styles/common/Icon";
 
 export type StyledFileEntryProps = {
-    dragging: boolean;
+  dragging: boolean;
 };
 
 export type StyledFileManagerProps = {
-    selecting: boolean;
+  selecting: boolean;
 };
 
 type FileManagerView = {
-    StyledFileEntry: StyledComponent<"li", DefaultTheme, StyledFileEntryProps>;
-    StyledFileManager: StyledComponent<
-        "ol",
-        DefaultTheme,
-        StyledFileManagerProps
-    >;
+  StyledFileEntry: StyledComponent<"li", DefaultTheme, StyledFileEntryProps>;
+  StyledFileManager: StyledComponent<
+    "ol",
+    DefaultTheme,
+    StyledFileManagerProps
+  >;
 };
 
 export type FileManagerViewNames = "icon" | "list";
 
 export const FileManagerViews: Record<FileManagerViewNames, FileManagerView> = {
-    icon: {
-        StyledFileEntry: StyledIconFileEntry,
-        StyledFileManager: StyledIconFileManager,
-    },
-    list: {
-        StyledFileEntry: StyledListFileEntry,
-        StyledFileManager: StyledListFileManager,
-    },
+  icon: {
+    StyledFileEntry: StyledIconFileEntry,
+    StyledFileManager: StyledIconFileManager,
+  },
+  list: {
+    StyledFileEntry: StyledListFileEntry,
+    StyledFileManager: StyledListFileManager,
+  },
 };
 
 export const FileEntryIconSize: { [view: string]: IconProps } = {
-    icon: {
-        imgSize: 48,
-    },
-    list: {
-        displaySize: 24,
-        imgSize: 48,
-    },
+  icon: {
+    imgSize: 48,
+  },
+  list: {
+    displaySize: 24,
+    imgSize: 48,
+  },
 };

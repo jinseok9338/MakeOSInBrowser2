@@ -7,7 +7,7 @@ import useFocusable from "components/system/window/useFocusable";
 import useWindowTransitions from "components/system/window/useWindowTransitions";
 import { useProcesses } from "contexts/process";
 import { useSession } from "contexts/session";
-import React,{ useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 type WindowProps = ComponentProcessProps & {
   children: React.ReactNode;

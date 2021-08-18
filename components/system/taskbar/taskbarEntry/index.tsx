@@ -12,57 +12,57 @@ import Icon from "styles/common/Icon";
 import React from "react";
 
 type TaskbarEntryProps = {
-    icon: string;
-    id: string;
-    title: string;
+  icon: string;
+  id: string;
+  title: string;
 };
 
 const TaskbarEntry = ({ icon, id, title }: TaskbarEntryProps): JSX.Element => {
-    const nextFocusableId = useNextFocusable(id);
-    const { foregroundId, setForegroundId } = useSession();
-    const isForeground = id === foregroundId;
-    const {
-        linkElement,
-        minimize,
-        processes: { [id]: { minimized = false } = {} },
-    } = useProcesses();
-    const linkTaskbarEntry = useCallback(
-        (taskbarEntry: HTMLButtonElement) =>
-            taskbarEntry && linkElement(id, "taskbarEntry", taskbarEntry),
-        [id, linkElement]
-    );
-    const [isPeekVisible, setPeekVisible] = useState(false);
-    const hidePeek = (): void => setPeekVisible(false);
-    const showPeek = (): void => setPeekVisible(true);
-    const onClick = (): void => {
-        if (minimized || isForeground) {
-            minimize(id);
-        }
+  const nextFocusableId = useNextFocusable(id);
+  const { foregroundId, setForegroundId } = useSession();
+  const isForeground = id === foregroundId;
+  const {
+    linkElement,
+    minimize,
+    processes: { [id]: { minimized = false } = {} },
+  } = useProcesses();
+  const linkTaskbarEntry = useCallback(
+    (taskbarEntry: HTMLButtonElement) =>
+      taskbarEntry && linkElement(id, "taskbarEntry", taskbarEntry),
+    [id, linkElement]
+  );
+  const [isPeekVisible, setPeekVisible] = useState(false);
+  const hidePeek = (): void => setPeekVisible(false);
+  const showPeek = (): void => setPeekVisible(true);
+  const onClick = (): void => {
+    if (minimized || isForeground) {
+      minimize(id);
+    }
 
-        setForegroundId(isForeground ? nextFocusableId : id);
-    };
+    setForegroundId(isForeground ? nextFocusableId : id);
+  };
 
-    return (
-        <StyledTaskbarEntry
-            foreground={isForeground}
-            title={title}
-            onClick={hidePeek}
-            onMouseEnter={showPeek}
-            onMouseLeave={hidePeek}
-            {...useTaskbarTransition()}
-            {...useTaskbarEntryContextMenu(id)}
-        >
-            <AnimatePresence>
-                {isPeekVisible && <PeekWindow id={id} />}
-            </AnimatePresence>
-            <Button onClick={onClick} ref={linkTaskbarEntry}>
-                <figure>
-                    <Icon src={icon} alt={title} imgSize={16} />
-                    <figcaption>{title}</figcaption>
-                </figure>
-            </Button>
-        </StyledTaskbarEntry>
-    );
+  return (
+    <StyledTaskbarEntry
+      foreground={isForeground}
+      title={title}
+      onClick={hidePeek}
+      onMouseEnter={showPeek}
+      onMouseLeave={hidePeek}
+      {...useTaskbarTransition()}
+      {...useTaskbarEntryContextMenu(id)}
+    >
+      <AnimatePresence>
+        {isPeekVisible && <PeekWindow id={id} />}
+      </AnimatePresence>
+      <Button onClick={onClick} ref={linkTaskbarEntry}>
+        <figure>
+          <Icon src={icon} alt={title} imgSize={16} />
+          <figcaption>{title}</figcaption>
+        </figure>
+      </Button>
+    </StyledTaskbarEntry>
+  );
 };
 
 export default TaskbarEntry;

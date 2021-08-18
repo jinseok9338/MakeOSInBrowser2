@@ -1,20 +1,16 @@
-import type { NextPage } from "next";
+import AppsLoader from "components/system/Apps/AppsLoader";
 import Background from "components/system/background/background";
-import React from "react";
+import FileManager from "components/system/Files/FileManager";
 import Taskbar from "components/system/taskbar";
-import { ProcessProvider } from "contexts/process";
-import ProcessLoader from "components/system/processes/processLoader";
+import React from "react";
 
-const Home: NextPage = () => {
-  return (
-    <>
-      <ProcessProvider>
-        <Background />
-        <Taskbar />
-        <ProcessLoader />
-      </ProcessProvider>
-    </>
-  );
-};
+const Home = (): React.ReactElement => (
+  <>
+    <Background />
+    <FileManager url="/desktop" view="icon" />
+    <Taskbar />
+    <AppsLoader />
+  </>
+);
 
 export default Home;

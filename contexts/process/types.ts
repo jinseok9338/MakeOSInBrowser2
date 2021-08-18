@@ -2,27 +2,27 @@ import type { ComponentProcessProps } from "components/system/Apps/RenderCompone
 import type { Size } from "components/system/window/RndWindow/useResizable";
 
 export type ProcessElements = {
-    componentWindow?: HTMLElement;
-    peekElement?: HTMLElement;
-    taskbarEntry?: HTMLElement;
+  componentWindow?: HTMLElement;
+  peekElement?: HTMLElement;
+  taskbarEntry?: HTMLElement;
 };
 
 export type Process = ProcessElements & {
-    autoSizing?: boolean;
-    backgroundColor?: string;
-    closing?: boolean;
-    Component: React.ComponentType<ComponentProcessProps>;
-    defaultSize?: Size;
-    hasWindow?: boolean;
-    icon: string;
-    lockAspectRatio?: boolean;
-    maximized?: boolean;
-    minimized?: boolean;
-    singleton?: boolean;
-    title: string;
-    url?: string;
+  autoSizing?: boolean;
+  backgroundColor?: string;
+  closing?: boolean;
+  Component: React.ComponentType<ComponentProcessProps>;
+  defaultSize?: Size;
+  hasWindow?: boolean;
+  icon: string;
+  lockAspectRatio?: boolean;
+  maximized?: boolean;
+  minimized?: boolean;
+  singleton?: boolean;
+  title: string;
+  url?: string;
 };
 
 export type Processes = {
-    [id: string]: Process;
+  [id: string]: Process;
 };

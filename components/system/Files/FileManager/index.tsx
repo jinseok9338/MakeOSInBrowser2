@@ -10,64 +10,64 @@ import type { FileManagerViewNames } from "components/system/Files/Views";
 import { FileManagerViews } from "components/system/Files/Views";
 import { useFileSystem } from "contexts/fileSystem";
 import { basename, extname, join } from "path";
-import React,{ useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MOUNTABLE_EXTENSIONS, SHORTCUT_EXTENSION } from "utils/constants";
 
 type FileManagerProps = {
-    url: string;
-    view: FileManagerViewNames;
+  url: string;
+  view: FileManagerViewNames;
 };
 
 const FileManager = ({ url, view }: FileManagerProps): JSX.Element => {
-    const [renaming, setRenaming] = useState("");
-    const { fileActions, files, folderActions } = useFolder(url, setRenaming);
-    const { mountFs, unMountFs } = useFileSystem();
-    const { StyledFileEntry, StyledFileManager } = FileManagerViews[view];
-    const fileManagerRef = useRef<HTMLOListElement | null>(null);
-    const draggableEntry = useDraggableEntries(url);
-    const focusableEntry = useFocusableEntries(fileManagerRef);
-    const { isSelecting, selectionRect, selectionStyling, selectionEvents } =
-        useSelection(fileManagerRef);
+  const [renaming, setRenaming] = useState("");
+  const { fileActions, files, folderActions } = useFolder(url, setRenaming);
+  const { mountFs, unMountFs } = useFileSystem();
+  const { StyledFileEntry, StyledFileManager } = FileManagerViews[view];
+  const fileManagerRef = useRef<HTMLOListElement | null>(null);
+  const draggableEntry = useDraggableEntries(url);
+  const focusableEntry = useFocusableEntries(fileManagerRef);
+  const { isSelecting, selectionRect, selectionStyling, selectionEvents } =
+    useSelection(fileManagerRef);
 
-    useEffect(() => {
-        const isMountable = MOUNTABLE_EXTENSIONS.has(extname(url));
+  useEffect(() => {
+    const isMountable = MOUNTABLE_EXTENSIONS.has(extname(url));
 
-        if (isMountable && files.length === 0) mountFs(url);
+    if (isMountable && files.length === 0) mountFs(url);
 
-        return () => {
-            if (isMountable && files.length > 0) unMountFs(url);
-        };
-    }, [files, mountFs, unMountFs, url]);
+    return () => {
+      if (isMountable && files.length > 0) unMountFs(url);
+    };
+  }, [files, mountFs, unMountFs, url]);
 
-    return (
-        <StyledFileManager
-            ref={fileManagerRef}
-            selecting={isSelecting}
-            {...selectionEvents}
-            {...useFileDrop(folderActions.newPath)}
-            {...useFolderContextMenu(url, folderActions)}
+  return (
+    <StyledFileManager
+      ref={fileManagerRef}
+      selecting={isSelecting}
+      {...selectionEvents}
+      {...useFileDrop(folderActions.newPath)}
+      {...useFolderContextMenu(url, folderActions)}
+    >
+      {isSelecting && <StyledSelection style={selectionStyling} />}
+      {files.map((file) => (
+        <StyledFileEntry
+          key={file}
+          {...draggableEntry(url, file)}
+          {...focusableEntry(file)}
         >
-            {isSelecting && <StyledSelection style={selectionStyling} />}
-            {files.map((file) => (
-                <StyledFileEntry
-                    key={file}
-                    {...draggableEntry(url, file)}
-                    {...focusableEntry(file)}
-                >
-                    <FileEntry
-                        fileActions={fileActions}
-                        fileManagerRef={fileManagerRef}
-                        name={basename(file, SHORTCUT_EXTENSION)}
-                        path={join(url, file)}
-                        renaming={renaming === file}
-                        selectionRect={selectionRect}
-                        setRenaming={setRenaming}
-                        view={view}
-                    />
-                </StyledFileEntry>
-            ))}
-        </StyledFileManager>
-    );
+          <FileEntry
+            fileActions={fileActions}
+            fileManagerRef={fileManagerRef}
+            name={basename(file, SHORTCUT_EXTENSION)}
+            path={join(url, file)}
+            renaming={renaming === file}
+            selectionRect={selectionRect}
+            setRenaming={setRenaming}
+            view={view}
+          />
+        </StyledFileEntry>
+      ))}
+    </StyledFileManager>
+  );
 };
 
 export default FileManager;

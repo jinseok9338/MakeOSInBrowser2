@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 const StyledRenameBox = styled.textarea.attrs({
-    autocomplete: "off",
-    rows: 1,
-    spellCheck: false,
+  autocomplete: "off",
+  rows: 1,
+  spellCheck: false,
 })`
   border: 1px solid rgb(100, 100, 100);
   font-family: inherit;

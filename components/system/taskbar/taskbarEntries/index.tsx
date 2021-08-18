@@ -5,23 +5,23 @@ import dynamic from "next/dynamic";
 import React from "react";
 
 const TaskbarEntry = dynamic(
-    () => import("components/system/taskbar/taskbarEntry")
+  () => import("components/system/taskbar/taskbarEntry")
 );
 
 const TaskbarEntries = (): JSX.Element => (
-    <StyledTaskbarEntries>
-        <ProcessConsumer>
-            {({ processes = {} }) => (
-                <AnimatePresence>
-                    {Object.entries(processes)
-                        .filter(([, { closing }]) => !closing)
-                        .map(([id, { icon, title }]) => (
-                            <TaskbarEntry key={id} icon={icon} id={id} title={title} />
-                        ))}
-                </AnimatePresence>
-            )}
-        </ProcessConsumer>
-    </StyledTaskbarEntries>
+  <StyledTaskbarEntries>
+    <ProcessConsumer>
+      {({ processes = {} }) => (
+        <AnimatePresence>
+          {Object.entries(processes)
+            .filter(([, { closing }]) => !closing)
+            .map(([id, { icon, title }]) => (
+              <TaskbarEntry key={id} icon={icon} id={id} title={title} />
+            ))}
+        </AnimatePresence>
+      )}
+    </ProcessConsumer>
+  </StyledTaskbarEntries>
 );
 
 export default TaskbarEntries;

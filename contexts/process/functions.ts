@@ -1,83 +1,83 @@
 import processDirectory from "contexts/process/directory";
 import type {
-    Process,
-    ProcessElements,
-    Processes,
+  Process,
+  ProcessElements,
+  Processes,
 } from "contexts/process/types";
 import { PROCESS_DELIMITER } from "utils/constants";
 
 export const setProcessSettings =
-    (processId: string, settings: Partial<Process>) =>
-        (currentProcesses: Processes): Processes => {
-            const { ...newProcesses } = currentProcesses;
+  (processId: string, settings: Partial<Process>) =>
+  (currentProcesses: Processes): Processes => {
+    const { ...newProcesses } = currentProcesses;
 
-            newProcesses[processId] = {
-                ...newProcesses[processId],
-                ...settings,
-            };
+    newProcesses[processId] = {
+      ...newProcesses[processId],
+      ...settings,
+    };
 
-            return newProcesses;
-        };
+    return newProcesses;
+  };
 
 export const closeProcess =
-    (processId: string, closing?: boolean) =>
-        (currentProcesses: Processes): Processes => {
-            if (closing) {
-                return setProcessSettings(processId, { closing })(currentProcesses);
-            }
+  (processId: string, closing?: boolean) =>
+  (currentProcesses: Processes): Processes => {
+    if (closing) {
+      return setProcessSettings(processId, { closing })(currentProcesses);
+    }
 
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const { [processId]: _closedProcess, ...remainingProcesses } =
-                currentProcesses;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { [processId]: _closedProcess, ...remainingProcesses } =
+      currentProcesses;
 
-            return remainingProcesses;
-        };
+    return remainingProcesses;
+  };
 
 export const createPid = (processId: string, url: string): string =>
-    url ? `${processId}${PROCESS_DELIMITER}${url}` : processId;
+  url ? `${processId}${PROCESS_DELIMITER}${url}` : processId;
 
 export const openProcess =
-    (processId: string, url: string) =>
-        (currentProcesses: Processes): Processes => {
-            const { singleton } = processDirectory[processId] || {};
+  (processId: string, url: string) =>
+  (currentProcesses: Processes): Processes => {
+    const { singleton } = processDirectory[processId] || {};
 
-            if (singleton && Object.keys(currentProcesses).includes(processId)) {
-                return setProcessSettings(processId, { url })(currentProcesses);
-            }
+    if (singleton && Object.keys(currentProcesses).includes(processId)) {
+      return setProcessSettings(processId, { url })(currentProcesses);
+    }
 
-            const id = singleton ? processId : createPid(processId, url);
+    const id = singleton ? processId : createPid(processId, url);
 
-            return currentProcesses[id] || !processDirectory[processId]
-                ? currentProcesses
-                : {
-                    ...currentProcesses,
-                    [id]: {
-                        ...processDirectory[processId],
-                        url,
-                    },
-                };
+    return currentProcesses[id] || !processDirectory[processId]
+      ? currentProcesses
+      : {
+          ...currentProcesses,
+          [id]: {
+            ...processDirectory[processId],
+            url,
+          },
         };
+  };
 
 export const maximizeProcess =
-    (processId: string) =>
-        (currentProcesses: Processes): Processes =>
-            setProcessSettings(processId, {
-                maximized: !currentProcesses[processId].maximized,
-            })(currentProcesses);
+  (processId: string) =>
+  (currentProcesses: Processes): Processes =>
+    setProcessSettings(processId, {
+      maximized: !currentProcesses[processId].maximized,
+    })(currentProcesses);
 
 export const minimizeProcess =
-    (processId: string) =>
-        (currentProcesses: Processes): Processes =>
-            setProcessSettings(processId, {
-                minimized: !currentProcesses[processId].minimized,
-            })(currentProcesses);
+  (processId: string) =>
+  (currentProcesses: Processes): Processes =>
+    setProcessSettings(processId, {
+      minimized: !currentProcesses[processId].minimized,
+    })(currentProcesses);
 
 export const setProcessElement =
-    (processId: string, name: keyof ProcessElements, element: HTMLElement) =>
-        (currentProcesses: Processes): Processes =>
-            setProcessSettings(processId, { [name]: element })(currentProcesses);
+  (processId: string, name: keyof ProcessElements, element: HTMLElement) =>
+  (currentProcesses: Processes): Processes =>
+    setProcessSettings(processId, { [name]: element })(currentProcesses);
 
 export const setTitle =
-    (processId: string, title: string) =>
-        (currentProcesses: Processes): Processes =>
-            setProcessSettings(processId, { title })(currentProcesses);
+  (processId: string, title: string) =>
+  (currentProcesses: Processes): Processes =>
+    setProcessSettings(processId, { title })(currentProcesses);

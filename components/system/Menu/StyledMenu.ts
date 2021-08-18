@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 
 type StyledMenuProps = {
-    isSubMenu: boolean;
-    x: number;
-    y: number;
+  isSubMenu: boolean;
+  x: number;
+  y: number;
 };
 
-const StyledMenu = styled(motion.nav) <StyledMenuProps>`
+const StyledMenu = styled(motion.nav)<StyledMenuProps>`
   background-color: rgb(43, 43, 43);
   border: 1px solid rgb(160, 160, 160);
   box-shadow: 1px 1px 1px hsla(0, 0%, 20%, 70%),

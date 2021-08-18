@@ -2,7 +2,7 @@ import StyledSidebar from "components/system/StartMenu/Sidebar/StyledSidebar";
 import styled from "styled-components";
 
 type StyledSidebarButtonProps = {
-    active?: boolean;
+  active?: boolean;
 };
 
 const StyledSidebarButton = styled.li<StyledSidebarButtonProps>`
@@ -15,7 +15,7 @@ const StyledSidebarButton = styled.li<StyledSidebarButtonProps>`
 
   &::before {
     border-left: ${({ active, theme }) =>
-        `4px solid ${active ? theme.colors.highlight : "transparent"}`};
+      `4px solid ${active ? theme.colors.highlight : "transparent"}`};
     content: "";
     height: ${({ theme }) => theme.sizes.startMenu.sideBar.height};
     left: 0;
@@ -25,7 +25,7 @@ const StyledSidebarButton = styled.li<StyledSidebarButtonProps>`
 
   figure {
     color: ${({ active, theme }) =>
-        active ? theme.colors.highlight : theme.colors.text};
+      active ? theme.colors.highlight : theme.colors.text};
     display: flex;
     place-items: center;
 

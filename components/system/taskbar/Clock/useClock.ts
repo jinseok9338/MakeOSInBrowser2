@@ -2,21 +2,21 @@ import { useEffect, useState } from "react";
 import { MILLISECONDS_IN_SECOND } from "utils/constants";
 
 const useClock = (): Date => {
-    const [now, setNow] = useState(new Date());
-    const updateClock = (): void => setNow(new Date());
+  const [now, setNow] = useState(new Date());
+  const updateClock = (): void => setNow(new Date());
 
-    useEffect(() => {
-        let timeoutId: NodeJS.Timeout;
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
 
-        timeoutId = setTimeout(() => {
-            updateClock();
-            timeoutId = setInterval(updateClock, MILLISECONDS_IN_SECOND);
-        }, MILLISECONDS_IN_SECOND - new Date().getMilliseconds());
+    timeoutId = setTimeout(() => {
+      updateClock();
+      timeoutId = setInterval(updateClock, MILLISECONDS_IN_SECOND);
+    }, MILLISECONDS_IN_SECOND - new Date().getMilliseconds());
 
-        return () => clearTimeout(timeoutId);
-    }, []);
+    return () => clearTimeout(timeoutId);
+  }, []);
 
-    return now;
+  return now;
 };
 
 export default useClock;

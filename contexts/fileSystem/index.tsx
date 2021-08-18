@@ -4,12 +4,12 @@ import useFileSystemContextState from "contexts/fileSystem/useFileSystemContextS
 import contextFactory from "utils/contextFactory";
 
 const { Consumer, Provider, useContext } =
-    contextFactory<FileSystemContextState>(useFileSystemContextState, () => (
-        <FileInput />
-    ));
+  contextFactory<FileSystemContextState>(useFileSystemContextState, () => (
+    <FileInput />
+  ));
 
 export {
-    Consumer as FileSystemConsumer,
-    Provider as FileSystemProvider,
-    useContext as useFileSystem,
+  Consumer as FileSystemConsumer,
+  Provider as FileSystemProvider,
+  useContext as useFileSystem,
 };

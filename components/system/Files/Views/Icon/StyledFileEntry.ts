@@ -50,7 +50,7 @@ const StyledFileEntry = styled.li<StyledFileEntryProps>`
 
   &:hover {
     background-color: ${({ dragging, theme }) =>
-        !dragging && theme.colors.fileEntry.background};
+      !dragging && theme.colors.fileEntry.background};
 
     &::before {
       border: ${({ dragging, theme }) =>
@@ -60,7 +60,7 @@ const StyledFileEntry = styled.li<StyledFileEntryProps>`
 
   &.focus-within {
     background-color: ${({ dragging, theme }) =>
-        !dragging && theme.colors.fileEntry.backgroundFocused};
+      !dragging && theme.colors.fileEntry.backgroundFocused};
     z-index: 1;
 
     &::before {
@@ -74,8 +74,8 @@ const StyledFileEntry = styled.li<StyledFileEntryProps>`
 
       &::before {
         border: ${({ dragging, theme }) =>
-        !dragging &&
-        `1px solid ${theme.colors.fileEntry.borderFocusedHover}`};
+          !dragging &&
+          `1px solid ${theme.colors.fileEntry.borderFocusedHover}`};
       }
     }
   }

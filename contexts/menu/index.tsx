@@ -5,12 +5,12 @@ import contextFactory from "utils/contextFactory";
 import React from "react";
 
 const { Consumer, Provider, useContext } = contextFactory<MenuContextState>(
-    useMenuContextState,
-    () => <Menu />
+  useMenuContextState,
+  () => <Menu />
 );
 
 export {
-    Consumer as MenuConsumer,
-    Provider as MenuProvider,
-    useContext as useMenu,
+  Consumer as MenuConsumer,
+  Provider as MenuProvider,
+  useContext as useMenu,
 };

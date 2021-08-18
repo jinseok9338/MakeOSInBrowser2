@@ -1,17 +1,17 @@
 import type { SelectionRect } from "components/system/Files/FileManager/Selection/useSelection";
 
 export const isSelectionIntersecting = (
-    element: DOMRect,
-    containerElement: DOMRect,
-    selection: SelectionRect
+  element: DOMRect,
+  containerElement: DOMRect,
+  selection: SelectionRect
 ): boolean => {
-    const { x = 0, y = 0, width = 0, height = 0 } = selection;
-    const selectionRect = new DOMRect(x, y, Number(width), Number(height));
+  const { x = 0, y = 0, width = 0, height = 0 } = selection;
+  const selectionRect = new DOMRect(x, y, Number(width), Number(height));
 
-    return !(
-        element.left - containerElement.left >= selectionRect.right ||
-        element.top - containerElement.top >= selectionRect.bottom ||
-        element.right - containerElement.left <= selectionRect.left ||
-        element.bottom - containerElement.top <= selectionRect.top
-    );
+  return !(
+    element.left - containerElement.left >= selectionRect.right ||
+    element.top - containerElement.top >= selectionRect.bottom ||
+    element.right - containerElement.left <= selectionRect.left ||
+    element.bottom - containerElement.top <= selectionRect.top
+  );
 };

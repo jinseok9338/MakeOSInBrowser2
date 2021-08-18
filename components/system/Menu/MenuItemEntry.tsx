@@ -9,72 +9,72 @@ import Icon from "styles/common/Icon";
 import React from "react";
 
 type MenuItemEntryProps = MenuItem & {
-    resetMenu: () => void;
+  resetMenu: () => void;
 };
 
 const MenuItemEntry = ({
-    action,
-    disabled,
-    icon,
-    label,
-    menu,
-    primary,
-    resetMenu,
-    seperator,
+  action,
+  disabled,
+  icon,
+  label,
+  menu,
+  primary,
+  resetMenu,
+  seperator,
 }: MenuItemEntryProps): JSX.Element => {
-    const entryRef = useRef<HTMLLIElement | null>(null);
-    const [subMenuOffset, setSubMenuOffset] = useState<Position>({ x: 0, y: 0 });
-    const [showSubMenu, setShowSubMenu] = useState(false);
-    const { sizes } = useTheme();
-    const onMouseEnter: React.MouseEventHandler = () => setShowSubMenu(true);
-    const onMouseLeave: React.MouseEventHandler = ({ relatedTarget }) => {
-        if (
-            !(relatedTarget instanceof HTMLElement) ||
-            !entryRef.current?.contains(relatedTarget)
-        ) {
-            setShowSubMenu(false);
-        }
-    };
-    const subMenuEvents = menu ? { onMouseEnter, onMouseLeave } : {};
+  const entryRef = useRef<HTMLLIElement | null>(null);
+  const [subMenuOffset, setSubMenuOffset] = useState<Position>({ x: 0, y: 0 });
+  const [showSubMenu, setShowSubMenu] = useState(false);
+  const { sizes } = useTheme();
+  const onMouseEnter: React.MouseEventHandler = () => setShowSubMenu(true);
+  const onMouseLeave: React.MouseEventHandler = ({ relatedTarget }) => {
+    if (
+      !(relatedTarget instanceof HTMLElement) ||
+      !entryRef.current?.contains(relatedTarget)
+    ) {
+      setShowSubMenu(false);
+    }
+  };
+  const subMenuEvents = menu ? { onMouseEnter, onMouseLeave } : {};
 
-    useEffect(() => {
-        if (menu && entryRef?.current) {
-            const { height, width } = entryRef?.current?.getBoundingClientRect();
+  useEffect(() => {
+    if (menu && entryRef?.current) {
+      const { height, width } = entryRef?.current?.getBoundingClientRect();
 
-            setSubMenuOffset({
-                x: width - sizes.contextMenu.subMenuOffset,
-                y: -height - sizes.contextMenu.subMenuOffset,
-            });
-        }
-    }, [menu, sizes.contextMenu.subMenuOffset]);
+      setSubMenuOffset({
+        x: width - sizes.contextMenu.subMenuOffset,
+        y: -height - sizes.contextMenu.subMenuOffset,
+      });
+    }
+  }, [menu, sizes.contextMenu.subMenuOffset]);
 
-    return (
-        <li
-            className={disabled ? "disabled" : ""}
-            ref={entryRef}
-            {...subMenuEvents}
+  return (
+    <li
+      className={disabled ? "disabled" : ""}
+      ref={entryRef}
+      {...subMenuEvents}
+    >
+      {seperator ? (
+        <hr />
+      ) : (
+        <Button
+          as="figure"
+          className={showSubMenu ? "active" : ""}
+          onClick={() => {
+            if (!menu) {
+              action?.();
+              resetMenu();
+            }
+          }}
         >
-            {seperator ? (
-                <hr />
-            ) : (
-                <Button
-                    as="figure"
-                    className={showSubMenu ? "active" : ""}
-                    onClick={() => {
-                        if (!menu) {
-                            action?.();
-                            resetMenu();
-                        }
-                    }}
-                >
-                    {icon && <Icon src={icon} alt={label} imgSize={16} />}
-                    <figcaption className={primary ? "primary" : ""}>{label}</figcaption>
-                    {menu && <ChevronRight />}
-                </Button>
-            )}
-            {showSubMenu && <Menu subMenu={{ items: menu, ...subMenuOffset }} />}
-        </li>
-    );
+          {icon && <Icon src={icon} alt={label} imgSize={16} />}
+          <figcaption className={primary ? "primary" : ""}>{label}</figcaption>
+          {menu && <ChevronRight />}
+        </Button>
+      )}
+      {showSubMenu && <Menu subMenu={{ items: menu, ...subMenuOffset }} />}
+    </li>
+  );
 };
 
 export default MenuItemEntry;
