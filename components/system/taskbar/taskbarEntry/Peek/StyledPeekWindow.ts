@@ -1,4 +1,4 @@
-import StyledTaskbarEntry from "components/system/Taskbar/TaskbarEntry/StyledTaskbarEntry";
+import StyledTaskbarEntry from "components/system/taskbar/taskbarEntry/styledTaskbarEntry";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 

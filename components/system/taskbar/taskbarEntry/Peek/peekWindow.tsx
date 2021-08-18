@@ -1,8 +1,8 @@
 import StyledPeekWindow from "components/system/taskbar/taskbarEntry/Peek/StyledPeekWindow";
 import usePeekTransition from "components/system/taskbar/taskbarEntry/Peek/usePeekTransition";
 import useWindowPeek from "components/system/taskbar/taskbarEntry/Peek/useWindowPeek";
-import useWindowActions from "components/system/window/titlebar/useWindowActions";
-import { CloseIcon } from "components/system/window/titlebar/WindowActionIcons";
+import useWindowActions from "components/system/window/titleBar/useWindowActions";
+import { CloseIcon } from "components/system/window/titleBar/WindowActionIcons";
 import { useProcesses } from "contexts/process";
 import { useSession } from "contexts/session";
 import { useEffect, useRef, useState } from "react";

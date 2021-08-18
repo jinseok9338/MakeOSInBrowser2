@@ -1,4 +1,4 @@
-import PeekWindow from "components/system/taskbar/taskbarEntry/Peek/PeekWindow";
+import PeekWindow from "components/system/taskbar/taskbarEntry/Peek/peekWindow";
 import StyledTaskbarEntry from "components/system/taskbar/taskbarEntry/styledTaskbarEntry";
 import useTaskbarEntryContextMenu from "components/system/taskbar/taskbarEntry/useTaskbarEntryContextMenu";
 import useTaskbarTransition from "components/system/taskbar/taskbarEntry/useTaskbarTransition";

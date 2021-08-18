@@ -1,4 +1,4 @@
-import StyledTaskbarEntries from "components/system/taskbar/taskbarEntries/StyledTaskbarEntries";
+import StyledTaskbarEntries from "components/system/taskbar/taskbarEntries/styledTaskbarEntries";
 import { ProcessConsumer } from "contexts/process";
 import { AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";

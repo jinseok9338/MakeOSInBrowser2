@@ -1,4 +1,4 @@
-import useWindowActions from "components/system/window/titlebar/useWindowActions";
+import useWindowActions from "components/system/window/titleBar/useWindowActions";
 import { useMenu } from "contexts/menu";
 import type { MenuItem } from "contexts/menu/useMenuContextState";
 

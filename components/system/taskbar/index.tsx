@@ -18,7 +18,7 @@ const taskbar = (): JSX.Element => {
       {startMenuVisible && <StartMenu />}
       <Styledtaskbar {...usetaskbarContextMenu()} {...FOCUSABLE_ELEMENT}>
         <StartButton />
-        <taskbarEntries />
+        <taskbarEntries/>
         <Clock />
       </Styledtaskbar>
     </>
