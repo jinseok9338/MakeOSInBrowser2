@@ -1,14 +1,14 @@
-import { makeStyles, Theme, createStyles } from "@material-ui/core";
+import styled from "styled-components";
 
-export const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      height: "100%",
-      left: theme.sizes.startButton.width,
-      position: "absolute",
-      right: theme.sizes.startButton.width,
-      paddingTop: 0,
-      paddingBottom: 0,
-    },
-  })
-);
+const StyledTaskbarEntries = styled.ol`
+  column-gap: 1px;
+  display: flex;
+  height: 100%;
+  left: ${({ theme }) => theme.sizes.startButton.width};
+  margin: 0 3px;
+  overflow: hidden;
+  position: absolute;
+  right: ${({ theme }) => theme.sizes.clock.width};
+`;
+
+export default StyledTaskbarEntries;
