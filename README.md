@@ -1,5 +1,4 @@
 Read Me.... need to update this too
 
--- need to make file managers
-
-- make file directory
+-- Make file directory and icons 
+-- Render Icons

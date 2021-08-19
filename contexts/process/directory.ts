@@ -41,7 +41,7 @@ const processDirectory: Processes = {
   //   title: "Webamp",
   // },
   HelloWorld: {
-    Component: dynamic(() => import("components/app/HelloWorld")),
+    Component: dynamic(() => import("components/apps/HelloWorld")),
     hasWindow: true,
     icon: "/favicon.ico",
     title: "hello World",
