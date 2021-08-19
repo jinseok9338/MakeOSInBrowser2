@@ -1,12 +1,5 @@
-/* eslint-disable
-  @typescript-eslint/explicit-function-return-type,
-  @typescript-eslint/no-var-requires,
-  no-console,
-  unicorn/no-process-exit
-*/
-
-const { readdir, readlink, stat, writeFile } = require("fs");
-const { basename, relative, join, resolve: resolvePath } = require("path");
+import { readdir, readlink, stat, writeFile } from "fs";
+import { basename, relative, join, resolve as resolvePath } from "path";
 
 const VERSION = 3;
 
@@ -17,6 +10,7 @@ const IDX_MODE = 3;
 const IDX_UID = 4;
 const IDX_GID = 5;
 const IDX_TARGET = 6;
+
 
 const args = process.argv.slice(2);
 const argPath = resolvePath(args[args.length - 1]);
