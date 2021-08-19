@@ -1,4 +1,3 @@
 Read Me.... need to update this too
 
--- Make file directory and icons 
--- Render Icons
+The window sticks to the edge of the screen and virtulization doesn't work 
