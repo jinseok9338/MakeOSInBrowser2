@@ -4,8 +4,10 @@ import {
   iterateFileName,
   sortContents,
 } from "components/system/Files/FileManager/functions";
+import type { FocusEntryFunctions } from "components/system/Files/FileManager/useFocusableEntries";
 import { useFileSystem } from "contexts/fileSystem";
-import { useSession } from "contexts/session";
+import type { AsyncZippable } from "fflate";
+import { zip } from "fflate";
 import { basename, dirname, join } from "path";
 import { useCallback, useEffect, useState } from "react";
 import { EMPTY_BUFFER, SHORTCUT_EXTENSION } from "utils/constants";
@@ -13,32 +15,41 @@ import { bufferToUrl, cleanUpBufferUrl } from "utils/functions";
 
 export type FileActions = {
   deleteFile: (path: string) => void;
-  downloadFile: (path: string) => void;
+  downloadFiles: (paths: string[]) => void;
   renameFile: (path: string, name?: string) => void;
 };
 
 export type FolderActions = {
-  newPath: (path: string, buffer?: Buffer, rename?: boolean) => void;
   addToFolder: () => void;
+  newPath: (path: string, buffer?: Buffer, rename?: boolean) => void;
+  pasteToFolder: () => void;
 };
 
 type Folder = {
   fileActions: FileActions;
   folderActions: FolderActions;
   files: string[];
+  updateFiles: (newFile?: string, oldFile?: string) => void;
 };
 
 const useFolder = (
   directory: string,
-  setRenaming: React.Dispatch<React.SetStateAction<string>>
+  setRenaming: React.Dispatch<React.SetStateAction<string>>,
+  { blurEntry, focusEntry }: FocusEntryFunctions
 ): Folder => {
   const [files, setFiles] = useState<string[]>([]);
   const [downloadLink, setDownloadLink] = useState<string>("");
-  const { addFile, addFsWatcher, fs, removeFsWatcher, updateFolder } =
-    useFileSystem();
-  const { focusEntry } = useSession();
+  const {
+    addFile,
+    addFsWatcher,
+    copyEntries,
+    fs,
+    pasteList,
+    removeFsWatcher,
+    updateFolder,
+  } = useFileSystem();
   const updateFiles = useCallback(
-    (newFile = "", oldFile = "") => {
+    (newFile?: string, oldFile?: string) => {
       if (oldFile && newFile) {
         setFiles((currentFiles) =>
           currentFiles.map((file) =>
@@ -65,25 +76,46 @@ const useFolder = (
 
       fsDelete(path, () => updateFolder(directory, "", path));
     });
-  const downloadFile = (path: string): void =>
-    fs?.readFile(path, (_error, contents = EMPTY_BUFFER) => {
-      const link = document.createElement("a");
+  const createLink = (contents: Buffer, fileName?: string): void => {
+    const link = document.createElement("a");
 
-      link.href = bufferToUrl(contents);
-      link.download = basename(path);
+    link.href = bufferToUrl(contents);
+    link.download = fileName || "download.zip";
 
-      link.click();
+    link.click();
 
-      setDownloadLink(link.href);
-    });
+    setDownloadLink(link.href);
+  };
+  const getFile = (path: string): Promise<[string, Buffer]> =>
+    new Promise((resolve) =>
+      fs?.readFile(path, (_error, contents = EMPTY_BUFFER) =>
+        resolve([basename(path), contents])
+      )
+    );
+  const downloadFiles = (paths: string[]): void => {
+    if (paths.length === 1) {
+      const [path] = paths;
+
+      fs?.readFile(path, (_error, contents = EMPTY_BUFFER) =>
+        createLink(contents, basename(path))
+      );
+    } else {
+      Promise.all(paths.map((path) => getFile(path))).then((zipContents) => {
+        zip(
+          Object.fromEntries(zipContents) as AsyncZippable,
+          (_zipError, newZipFile) => createLink(Buffer.from(newZipFile))
+        );
+      });
+    }
+  };
+
   const renameFile = (path: string, name?: string): void => {
     const newName = name?.trim();
 
     if (newName) {
       const newPath = join(
         directory,
-        `${newName}${
-          path.endsWith(SHORTCUT_EXTENSION) ? SHORTCUT_EXTENSION : ""
+        `${newName}${path.endsWith(SHORTCUT_EXTENSION) ? SHORTCUT_EXTENSION : ""
         }`
       );
 
@@ -102,10 +134,26 @@ const useFolder = (
     rename = false,
     iteration = 0
   ): void => {
-    if (!buffer && ![".", directory].includes(dirname(name))) {
-      fs?.rename(name, join(directory, basename(name)), () =>
-        updateFolder(dirname(name), "", name)
-      );
+    if (!buffer && dirname(name) !== ".") {
+      const uniqueName = !iteration
+        ? basename(name)
+        : iterateFileName(basename(name), iteration);
+      const renamedPath = join(directory, uniqueName);
+
+      if (name !== renamedPath) {
+        fs?.exists(renamedPath, (exists) => {
+          if (exists) {
+            newPath(name, buffer, rename, iteration + 1);
+          } else {
+            fs?.rename(name, renamedPath, () => {
+              updateFolder(directory, uniqueName);
+              updateFolder(dirname(name), "", name);
+              blurEntry();
+              focusEntry(uniqueName);
+            });
+          }
+        });
+      }
     } else {
       const uniqueName = !iteration ? name : iterateFileName(name, iteration);
       const resolvedPath = join(directory, uniqueName);
@@ -130,6 +178,17 @@ const useFolder = (
       }
     }
   };
+  const pasteToFolder = (): void =>
+    Object.entries(pasteList).forEach(([fileEntry, operation]) => {
+      if (operation === "move") {
+        newPath(fileEntry);
+        copyEntries([]);
+      } else {
+        fs?.readFile(fileEntry, (_readError, buffer = EMPTY_BUFFER) =>
+          newPath(basename(fileEntry), buffer)
+        );
+      }
+    });
 
   useEffect(updateFiles, [directory, fs, updateFiles]);
 
@@ -149,14 +208,16 @@ const useFolder = (
   return {
     fileActions: {
       deleteFile,
-      downloadFile,
+      downloadFiles,
       renameFile,
     },
     folderActions: {
-      newPath,
       addToFolder: () => addFile(newPath),
+      newPath,
+      pasteToFolder,
     },
     files,
+    updateFiles,
   };
 };
 

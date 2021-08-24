@@ -9,7 +9,7 @@ const Home = (): React.ReactElement => (
     <FileManager url="/desktop" view="icon" />
     <Taskbar />
     <AppsLoader />
-    <Background />
+    {/* <Background /> */}
   </>
 );
 

@@ -16,9 +16,11 @@ import type React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { EMPTY_BUFFER } from "utils/constants";
 
+type FilePasteOperations = Record<string, "copy" | "move">;
+
 export type FileSystemContextState = {
   fs?: FSModule;
-  mountFs: (url: string) => void;
+  mountFs: (url: string) => Promise<void>;
   setFileInput: React.Dispatch<
     React.SetStateAction<HTMLInputElement | undefined>
   >;
@@ -28,6 +30,9 @@ export type FileSystemContextState = {
   updateFolder: (folder: string, newFile?: string, oldFile?: string) => void;
   addFsWatcher: (folder: string, updateFiles: UpdateFiles) => void;
   removeFsWatcher: (folder: string, updateFiles: UpdateFiles) => void;
+  pasteList: FilePasteOperations;
+  copyEntries: (entries: string[]) => void;
+  moveEntries: (entries: string[]) => void;
 };
 
 const { BFSRequire, configure, FileSystem } = BrowserFS as typeof IBrowserFS;
@@ -38,11 +43,23 @@ const useFileSystemContextState = (): FileSystemContextState => {
   const [fsWatchers, setFsWatchers] = useState<Record<string, UpdateFiles[]>>(
     {}
   );
+  const [pasteList, setPasteList] = useState<FilePasteOperations>({});
+  const updatePasteEntries = (
+    entries: string[],
+    operation: "copy" | "move"
+  ): void =>
+    setPasteList(
+      Object.fromEntries(entries.map((entry) => [entry, operation]))
+    );
+  const copyEntries = (entries: string[]): void =>
+    updatePasteEntries(entries, "copy");
+  const moveEntries = (entries: string[]): void =>
+    updatePasteEntries(entries, "move");
   const addFsWatcher = useCallback(
     (folder: string, updateFiles: UpdateFiles): void =>
       setFsWatchers((currentFsWatcher) => ({
         ...currentFsWatcher,
-        [folder]: [...(currentFsWatcher?.[folder] || []), updateFiles],
+        [folder]: [...(currentFsWatcher[folder] || []), updateFiles],
       })),
     []
   );
@@ -50,7 +67,7 @@ const useFileSystemContextState = (): FileSystemContextState => {
     (folder: string, updateFiles: UpdateFiles): void =>
       setFsWatchers((currentFsWatcher) => ({
         ...currentFsWatcher,
-        [folder]: currentFsWatcher?.[folder]?.filter(
+        [folder]: (currentFsWatcher[folder] || []).filter(
           (updateFilesInstance) => updateFilesInstance !== updateFiles
         ),
       })),
@@ -58,16 +75,21 @@ const useFileSystemContextState = (): FileSystemContextState => {
   );
   const updateFolder = useCallback(
     (folder: string, newFile?: string, oldFile?: string): void => {
-      const relevantPaths = Object.keys(fsWatchers).filter(
-        (watchedFolder) =>
-          watchedFolder === folder ||
-          watchedFolder === dirname(folder) ||
-          watchedFolder.startsWith(join(folder, "/"))
-      );
+      const relevantPaths =
+        folder === "/"
+          ? [folder]
+          : Object.keys(fsWatchers).filter(
+            (watchedPath) =>
+              watchedPath === folder ||
+              (watchedPath !== "/" && watchedPath === dirname(folder)) ||
+              watchedPath.startsWith(join(folder, "/"))
+          );
 
       relevantPaths.forEach((watchedFolder) =>
         fsWatchers[watchedFolder].forEach((updateFiles) =>
-          updateFiles(newFile, oldFile)
+          watchedFolder === folder
+            ? updateFiles(newFile, oldFile)
+            : updateFiles()
         )
       );
     },
@@ -75,22 +97,24 @@ const useFileSystemContextState = (): FileSystemContextState => {
     [fsWatchers]
   );
   const rootFs = fs?.getRootFS() as MountableFileSystem;
-  const mountFs = (url: string): void =>
-    fs?.readFile(url, (_readError, fileData = EMPTY_BUFFER) => {
-      const isISO = extname(url) === ".iso";
-      const createFs: BFSCallback<IsoFS | ZipFS> = (_createError, newFs) => {
-        if (newFs) {
-          rootFs?.mount(url, newFs);
-          updateFolder(url);
-        }
-      };
+  const mountFs = (url: string): Promise<void> =>
+    new Promise((resolve) =>
+      fs?.readFile(url, (_readError, fileData = EMPTY_BUFFER) => {
+        const isISO = extname(url) === ".iso";
+        const createFs: BFSCallback<IsoFS | ZipFS> = (_createError, newFs) => {
+          if (newFs) {
+            rootFs?.mount(url, newFs);
+            resolve();
+          }
+        };
 
-      if (isISO) {
-        FileSystem.IsoFS.Create({ data: fileData }, createFs);
-      } else {
-        FileSystem.ZipFS.Create({ zipData: fileData }, createFs);
-      }
-    });
+        if (isISO) {
+          FileSystem.IsoFS.Create({ data: fileData }, createFs);
+        } else {
+          FileSystem.ZipFS.Create({ zipData: fileData }, createFs);
+        }
+      })
+    );
   const unMountFs = (url: string): void => rootFs?.umount(url);
   const addFile = (callback: (name: string, buffer?: Buffer) => void): void => {
     if (fileInput) {
@@ -130,6 +154,9 @@ const useFileSystemContextState = (): FileSystemContextState => {
     updateFolder,
     addFsWatcher,
     removeFsWatcher,
+    pasteList,
+    copyEntries,
+    moveEntries,
   };
 };
 

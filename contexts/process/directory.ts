@@ -40,12 +40,6 @@ const processDirectory: Processes = {
     singleton: true,
     title: "Webamp",
   },
-  HelloWorld: {
-    Component: dynamic(() => import("components/apps/FileExplorer")),
-    hasWindow: true,
-    icon: "/favicon.ico",
-    title: "hello World",
-  },
 };
 
 export default processDirectory;

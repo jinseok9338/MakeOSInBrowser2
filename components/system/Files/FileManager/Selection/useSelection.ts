@@ -60,12 +60,12 @@ const useSelection = (
   const isSelecting = hasSize && hasPosition;
   const selectionStyling = isSelecting
     ? {
-        height: `${Math.abs(Number(h))}px`,
-        width: `${Math.abs(Number(w))}px`,
-        transform: `translate(
+      height: `${Math.abs(Number(h))}px`,
+      width: `${Math.abs(Number(w))}px`,
+      transform: `translate(
             ${Number(x) + (Number(w) < 0 ? Number(w) : 0)}px,
             ${Number(y) + (Number(h) < 0 ? Number(h) : 0)}px)`,
-      }
+    }
     : {};
 
   return {
@@ -76,10 +76,10 @@ const useSelection = (
       onMouseDown,
       ...(hasPosition
         ? {
-            onMouseMove,
-            onMouseLeave: resetSelection,
-            onMouseUp: resetSelection,
-          }
+          onMouseMove,
+          onMouseLeave: resetSelection,
+          onMouseUp: resetSelection,
+        }
         : {}),
     },
   };

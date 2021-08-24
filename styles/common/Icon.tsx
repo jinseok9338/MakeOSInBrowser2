@@ -1,12 +1,12 @@
 import { basename, dirname, join } from "path";
-import { memo, useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import styled from "styled-components";
 import { cleanUpBufferUrl } from "utils/functions";
-import React from "react";
 
 export type IconProps = {
-  displaySize?: number;
+  displaySize?: nReact,
   imgSize: number;
+  moving?: boolean;
 };
 
 const onLoad: React.ReactEventHandler = ({ target }) =>
@@ -23,8 +23,9 @@ const StyledIcon = styled.img.attrs<IconProps>(
         : join(dirname(src), `${imgSize}x${imgSize}`, basename(src)),
     width: displaySize || imgSize,
   })
-)<IconProps>`
+) <IconProps>`
   object-fit: contain;
+  opacity: ${({ moving }) => (moving ? 0.5 : 1)};
   visibility: hidden;
 `;
 

@@ -10,8 +10,9 @@ import type { FileManagerViewNames } from "components/system/Files/Views";
 import { FileManagerViews } from "components/system/Files/Views";
 import { useFileSystem } from "contexts/fileSystem";
 import { basename, extname, join } from "path";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MOUNTABLE_EXTENSIONS, SHORTCUT_EXTENSION } from "utils/constants";
+import React from "react";
 
 type FileManagerProps = {
   url: string;
@@ -20,24 +21,31 @@ type FileManagerProps = {
 
 const FileManager = ({ url, view }: FileManagerProps): JSX.Element => {
   const [renaming, setRenaming] = useState("");
-  const { fileActions, files, folderActions } = useFolder(url, setRenaming);
+  const fileManagerRef = useRef<HTMLOListElement | null>(null);
+  const { focusedEntries, focusableEntry, ...focusFunctions } =
+    useFocusableEntries(fileManagerRef);
+  const draggableEntry = useDraggableEntries(focusedEntries, focusFunctions);
+  const { fileActions, files, folderActions, updateFiles } = useFolder(
+    url,
+    setRenaming,
+    focusFunctions
+  );
   const { mountFs, unMountFs } = useFileSystem();
   const { StyledFileEntry, StyledFileManager } = FileManagerViews[view];
-  const fileManagerRef = useRef<HTMLOListElement | null>(null);
-  const draggableEntry = useDraggableEntries(url);
-  const focusableEntry = useFocusableEntries(fileManagerRef);
   const { isSelecting, selectionRect, selectionStyling, selectionEvents } =
     useSelection(fileManagerRef);
 
   useEffect(() => {
     const isMountable = MOUNTABLE_EXTENSIONS.has(extname(url));
 
-    if (isMountable && files.length === 0) mountFs(url);
+    if (isMountable && files.length === 0) {
+      mountFs(url).then(() => updateFiles());
+    }
 
     return () => {
       if (isMountable && files.length > 0) unMountFs(url);
     };
-  }, [files, mountFs, unMountFs, url]);
+  }, [files, mountFs, unMountFs, updateFiles, url]);
 
   return (
     <StyledFileManager
@@ -57,6 +65,8 @@ const FileManager = ({ url, view }: FileManagerProps): JSX.Element => {
           <FileEntry
             fileActions={fileActions}
             fileManagerRef={fileManagerRef}
+            focusedEntries={focusedEntries}
+            focusFunctions={focusFunctions}
             name={basename(file, SHORTCUT_EXTENSION)}
             path={join(url, file)}
             renaming={renaming === file}

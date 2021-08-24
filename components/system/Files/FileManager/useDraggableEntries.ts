@@ -1,5 +1,4 @@
-import { useFileSystem } from "contexts/fileSystem";
-import { useSession } from "contexts/session";
+import type { FocusEntryFunctions } from "components/system/Files/FileManager/useFocusableEntries";
 import { join } from "path";
 import type { DragEventHandler } from "react";
 import { useState } from "react";
@@ -13,24 +12,28 @@ type DraggableEntryProps = {
 
 type DraggableEntry = (url: string, file: string) => DraggableEntryProps;
 
-const useDraggableEntries = (url: string): DraggableEntry => {
-  const { updateFolder } = useFileSystem();
-  const { blurEntry, focusEntry } = useSession();
+const useDraggableEntries = (
+  focusedEntries: string[],
+  { blurEntry, focusEntry }: FocusEntryFunctions
+): DraggableEntry => {
   const [dragging, setDragging] = useState(false);
   const onDragStart =
     (entryUrl: string, file: string): DragEventHandler =>
-    (event) => {
-      setDragging(true);
-      blurEntry();
-      focusEntry(file);
-      event.dataTransfer.setData("text/plain", join(entryUrl, file));
-      Object.assign(event.dataTransfer, { effectAllowed: "move" });
-      console.log("Dragging"); 
-    };
-  const onDragEnd = (): void => {
-    setDragging(false);
-    updateFolder(url);
-  };
+      (event) => {
+        setDragging(true);
+        blurEntry();
+        focusEntry(file);
+        event.dataTransfer.setData(
+          "text/plain",
+          focusedEntries.length === 0
+            ? join(entryUrl, file)
+            : focusedEntries
+              .map((entryFile) => join(entryUrl, entryFile))
+              .toString()
+        );
+        Object.assign(event.dataTransfer, { effectAllowed: "move" });
+      };
+  const onDragEnd = (): void => setDragging(false);
 
   return (entryUrl: string, file: string) => ({
     draggable: true,

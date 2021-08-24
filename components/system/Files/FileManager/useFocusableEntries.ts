@@ -1,4 +1,4 @@
-import { useSession } from "contexts/session";
+import { useState } from "react";
 
 type FocusedEntryProps = {
   className: string;
@@ -8,10 +8,34 @@ type FocusedEntryProps = {
 
 type FocusableEntry = (file: string) => FocusedEntryProps;
 
+export type FocusEntryFunctions = {
+  blurEntry: (entry?: string) => void;
+  focusEntry: (entry: string) => void;
+};
+
+type FocusableEntries = FocusEntryFunctions & {
+  focusableEntry: FocusableEntry;
+  focusedEntries: string[];
+};
+
 const useFocusableEntries = (
   fileManagerRef: React.MutableRefObject<HTMLOListElement | null>
-): FocusableEntry => {
-  const { focusedEntries, blurEntry, focusEntry } = useSession();
+): FocusableEntries => {
+  const [focusedEntries, setFocusedEntries] = useState<string[]>([]);
+  const blurEntry = (entry?: string): void =>
+    setFocusedEntries(
+      entry
+        ? (currentFocusedEntries) =>
+          currentFocusedEntries.filter(
+            (focusedEntry) => focusedEntry !== entry
+          )
+        : []
+    );
+  const focusEntry = (entry: string): void =>
+    setFocusedEntries((currentFocusedEntries) => [
+      ...currentFocusedEntries,
+      entry,
+    ]);
   const onBlurCapture: React.FocusEventHandler = ({ relatedTarget }) => {
     if (
       !(relatedTarget instanceof HTMLElement) ||
@@ -20,13 +44,12 @@ const useFocusableEntries = (
       blurEntry();
     }
   };
-
-  return (file: string) => {
-    const focusedFile = focusedEntries.includes(file);
-    const className = focusedFile ? "focus-within" : "";
+  const focusableEntry = (file: string): FocusedEntryProps => {
+    const isFocused = focusedEntries.includes(file);
+    const className = isFocused ? "focus-within" : "";
     const onClick: React.MouseEventHandler = ({ ctrlKey }) => {
       if (ctrlKey) {
-        if (focusedEntries.includes(file)) {
+        if (isFocused) {
           blurEntry(file);
         } else {
           focusEntry(file);
@@ -39,6 +62,8 @@ const useFocusableEntries = (
 
     return { className, onBlurCapture, onClick };
   };
+
+  return { blurEntry, focusableEntry, focusedEntries, focusEntry };
 };
 
 export default useFocusableEntries;

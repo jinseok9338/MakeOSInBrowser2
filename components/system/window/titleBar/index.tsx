@@ -32,6 +32,9 @@ const Titlebar = ({ id }: TitlebarProps): JSX.Element => {
   } = useProcesses();
   const { foregroundId } = useSession();
   const isForeground = id === foregroundId;
+
+
+
   const { onClose, onMaximize, onMinimize } = useWindowActions(id);
   const disableMaximize = autoSizing && !lockAspectRatio;
   const onClickClose = useDoubleClick(onClose);
