@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { cleanUpBufferUrl } from "utils/functions";
 
 export type IconProps = {
-  displaySize?: nReact,
+  displaySize?: number,
   imgSize: number;
   moving?: boolean;
 };
