@@ -1,16 +1,17 @@
 import AppsLoader from "components/system/Apps/AppsLoader";
-import Background from "components/system/background/background";
+
 import FileManager from "components/system/Files/FileManager";
 import Taskbar from "components/system/taskbar";
+import Desktop from "components/system/Desktop";
 import React from "react";
 
 const Home = (): React.ReactElement => (
-  <>
+  <Desktop>
     <FileManager url="/desktop" view="icon" />
     <Taskbar />
     <AppsLoader />
-    {/* <Background /> */}
-  </>
+  </Desktop>
+
 );
 
 export default Home;

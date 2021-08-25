@@ -12,7 +12,6 @@ const App = ({ Component, pageProps }: AppProps): React.ReactElement => (
     <SessionProvider>
       <ProcessProvider>
         <StyledApp>
-          {/* <Metadata /> */}
           <MenuProvider>
             <Component {...pageProps} />
           </MenuProvider>
