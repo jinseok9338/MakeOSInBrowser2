@@ -15,6 +15,8 @@ const useRnd = (id: string, maximized = false): Props => {
     _event,
     { x: positionX, y: positionY }
   ) => setPosition({ x: positionX, y: positionY });
+ 
+
   const onResizeStop: RndResizeCallback = (
     _event,
     _direction,

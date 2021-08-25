@@ -16,7 +16,7 @@ const useSessionContextState = (): SessionContextState => {
   const [themeName, setThemeName] = useState("");
   const [windowStates, setWindowStates] = useState<WindowStates>({});
   const [startMenuVisible, setStartMenuVisible] = useState(false);
-  const [wallpaperFit, setWallpaperFit] = useState<WallpaperFit>("fill");
+const [wallpaperFit, setWallpaperFit] = useState<WallpaperFit>("fill");
   const [wallpaperImage, setWallpaperImage] = useState("");
   const toggleStartMenu = (showMenu?: boolean): void =>
     setStartMenuVisible((currentMenuState) => showMenu ?? !currentMenuState);
@@ -53,8 +53,7 @@ const useSessionContextState = (): SessionContextState => {
   const setWallpaper = (image: string, fit: WallpaperFit): void => {
     setWallpaperFit(fit);
     setWallpaperImage(image);
-  };
-
+  };  
   useEffect(() => {
     if (sessionLoaded) {
       fs?.writeFile(

@@ -30,8 +30,8 @@ const useDraggable = (id: string, size: Size): Draggable => {
   });
   const [{ x, y }, setPosition] = useState<Position>(
     (!isOffscreen && sessionPosition) ||
-      cascadePosition(id, processes, stackOrder, cascadeOffset) ||
-      centerPosition(size, taskbarHeight)
+    cascadePosition(id, processes, stackOrder, cascadeOffset) ||
+    centerPosition(size, taskbarHeight)
   );
 
   useEffect(() => {
@@ -44,5 +44,3 @@ const useDraggable = (id: string, size: Size): Draggable => {
 };
 
 export default useDraggable;
-
-//Edit Session Context
