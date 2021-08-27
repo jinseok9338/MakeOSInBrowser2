@@ -1,9 +1,6 @@
 import StyledDesktop from "components/system/Desktop/StyledDesktop";
-import useWallpaper from "components/system/Desktop/wallpapers/useWallpaper";
 import dynamic from "next/dynamic";
 import React,{ useRef } from "react";
-import { IParticlesParams } from "react-particles-js";
-import { IOptions, RecursivePartial } from "tsparticles";
 import  { ParticleEffectProp } from "./wallpapers/particlesEffect";
 import particleProps from "./wallpapers/particlesEffect/particlesPropsConfig";
 import useParticlesParamsConfig  from "./wallpapers/particlesEffect/useParticlesPropsConfig";
@@ -16,13 +13,13 @@ type DesktopProps = {
 const Desktop = ({ children }: DesktopProps): JSX.Element => {
      const desktopRef = useRef<HTMLElement | null>(null);
 
-    // useWallpaper(desktopRef);
+  
 
     const particleSetting = useParticlesParamsConfig(particleProps);
 
     return <StyledDesktop ref={desktopRef}>
-        <ParticleEffect ParticlesParamsConfig={particleSetting as ParticleEffectProp} />
         {children}
+        <ParticleEffect ParticlesParamsConfig={particleSetting as ParticleEffectProp} />
     </StyledDesktop>;
 };
 

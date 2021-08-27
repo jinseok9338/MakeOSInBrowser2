@@ -17,6 +17,7 @@ const GlobalStyle = createGlobalStyle`
     overflow: hidden;
   }
 
+ 
   ol,
   ul {
     list-style: none;

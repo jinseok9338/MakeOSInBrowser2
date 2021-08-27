@@ -1,7 +1,6 @@
-import { ParticlesProps, IParticlesParams } from "react-particles-js";
+import {  IParticlesParams } from "react-particles-js";
 import { particlePropsType } from "components/system/Desktop/wallpapers/particlesEffect/particlesPropsConfig";
 import { useState, useEffect } from "react";
-
 
 
 const useParticlesParamsConfig = (particleOptions: particlePropsType): IParticlesParams =>  {

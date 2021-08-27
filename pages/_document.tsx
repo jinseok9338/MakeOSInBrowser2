@@ -17,8 +17,10 @@ export default class MyDocument extends Document {
       <Html lang={DEFAULT_LOCALE}>
         <Head />
         <body>
+          <div id="particles-js">
           <Main />
           <NextScript />
+          </div>
         </body>
         <Script
           defer
