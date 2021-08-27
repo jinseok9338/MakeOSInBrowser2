@@ -1,19 +1,15 @@
 import React from "react";
-import useParticlesParamsConfig from "components/system/Desktop/wallpapers/particlesEffect/useParticlesPropsConfig";
-import Particle from "react-particles-js";
+import Particle, { IParticlesParams } from "react-particles-js";
 
-type ParticleEffectProp = {
-    children: React.ReactChildren,
-    useParticlesParamsConfig: typeof useParticlesParamsConfig
+export type ParticleEffectProp = {
+    ParticlesParamsConfig: IParticlesParams
 }
 
-const ParticleEffect = ({ children, useParticlesParamsConfig }: ParticleEffectProp): JSX.Element => {
+const ParticleEffect = ({ ParticlesParamsConfig }: ParticleEffectProp): JSX.Element => {
 
     return (
-        <Particle params={{useParticlesParamsConfig}} >
-            {children}
-        </Particle>
-    );
+        <Particle params={ ParticlesParamsConfig} />);
 };
+
 
 export default ParticleEffect;

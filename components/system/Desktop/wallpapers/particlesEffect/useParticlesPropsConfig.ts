@@ -11,17 +11,16 @@ const useParticlesParamsConfig = (particleOptions: particlePropsType): IParticle
         return obj[keys[keys.length * Math.random() << 0]];
     };
 
-    const [particleSetting, setParticleSetting] = useState<IParticlesParams>();
+    const [particleSetting, setParticleSetting] = useState<IParticlesParams>({} as IParticlesParams );
 
     useEffect(() => {
         setParticleSetting(() => randomProperty(particleOptions));
     },[]);
    
 
-    return particleSetting as IParticlesParams ;
+    return particleSetting;
       
     
-      
 };
 
 

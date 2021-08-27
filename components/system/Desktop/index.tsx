@@ -1,17 +1,29 @@
 import StyledDesktop from "components/system/Desktop/StyledDesktop";
 import useWallpaper from "components/system/Desktop/wallpapers/useWallpaper";
+import dynamic from "next/dynamic";
 import React,{ useRef } from "react";
+import { IParticlesParams } from "react-particles-js";
+import { IOptions, RecursivePartial } from "tsparticles";
+import  { ParticleEffectProp } from "./wallpapers/particlesEffect";
+import particleProps from "./wallpapers/particlesEffect/particlesPropsConfig";
+import useParticlesParamsConfig  from "./wallpapers/particlesEffect/useParticlesPropsConfig";
+const ParticleEffect = dynamic(() => import("./wallpapers/particlesEffect"));
 
 type DesktopProps = {
     children: React.ReactNode;
 };
 
 const Desktop = ({ children }: DesktopProps): JSX.Element => {
-    const desktopRef = useRef<HTMLElement | null>(null);
+     const desktopRef = useRef<HTMLElement | null>(null);
 
-    useWallpaper(desktopRef);
+    // useWallpaper(desktopRef);
 
-    return <StyledDesktop ref={desktopRef}>{children}</StyledDesktop>;
+    const particleSetting = useParticlesParamsConfig(particleProps);
+
+    return <StyledDesktop ref={desktopRef}>
+        <ParticleEffect ParticlesParamsConfig={particleSetting as ParticleEffectProp} />
+        {children}
+    </StyledDesktop>;
 };
 
 export default Desktop;
