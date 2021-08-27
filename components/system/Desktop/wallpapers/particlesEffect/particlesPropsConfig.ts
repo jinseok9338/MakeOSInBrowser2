@@ -157,20 +157,20 @@ const particleProps: particlePropsType = {
         retina_detect: true
     },
     polygonMask: {
-        fps_limit: 28,
+        fps_limit: 24,
         particles: {
             collisions: {
                 enable: false
             },
             number: {
-                value: 200,
+                value: 50,
                 density: {
                     enable: false
                 }
             },
             line_linked: {
                 enable: true,
-                distance: 30,
+                distance: 50,
                 opacity: 0.4
             },
             move: {
@@ -193,7 +193,7 @@ const particleProps: particlePropsType = {
             move: {
                 radius: 10
             },
-            url: "/small-deer.2a0425af.svg",
+            url: "/desktop/apple.svg",
             inline: {
                 arrangement: "equidistant"
             },

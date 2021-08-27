@@ -12,6 +12,10 @@ type DesktopProps = {
 
 const Desktop = ({ children }: DesktopProps): JSX.Element => {
      const desktopRef = useRef<HTMLElement | null>(null);
+   
+    if (process.browser) {
+        require("pathseg");
+    }
 
   
 
