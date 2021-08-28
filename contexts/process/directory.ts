@@ -40,6 +40,15 @@ const processDirectory: Processes = {
     singleton: true,
     title: "Webamp",
   },
+  GBA: {
+    Component: dynamic(() => import("components/apps/GBA")),
+    icon: "/icons/GBA.png",
+    title: "GBA",
+    defaultSize: {
+      height: 400,
+      width: 550,
+    },
+  }
 };
 
 export default processDirectory;
