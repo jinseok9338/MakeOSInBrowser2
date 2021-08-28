@@ -1,4 +1,6 @@
-Read Me.... need to update this too
+Discard Linux and other v80 apps 
 
-The window sticks to the edge of the screen and virtulization doesn't work 
-Why Creating new file when dragging icons
+Add GBA Emulator using GBA JS with Pokemon game
+
+Add Blog Page 
+

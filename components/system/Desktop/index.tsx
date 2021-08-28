@@ -22,8 +22,8 @@ const Desktop = ({ children }: DesktopProps): JSX.Element => {
     const particleSetting = useParticlesParamsConfig(particleProps);
 
     return <StyledDesktop ref={desktopRef}>
-        {children}
         <ParticleEffect ParticlesParamsConfig={particleSetting as ParticleEffectProp} />
+        {children}
     </StyledDesktop>;
 };
 
